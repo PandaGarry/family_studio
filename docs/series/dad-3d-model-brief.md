@@ -14,6 +14,7 @@
 - `assets/references/character-masters/characters/dad/character.json` — исходные пропорции, палитра и ограничения identity.
 - Происхождение, версия и ограничения использования: [`assets/references/character-masters/README.md`](../../assets/references/character-masters/README.md).
 - Отклонённый R4 procedural study (не использовать как модель-основу): [`assets/models/dad/rejected/dad-procedural-v1.blend`](../../assets/models/dad/rejected/dad-procedural-v1.blend) и его Cycles renders в [`assets/renders/dad-procedural-v1-rejected/`](../../assets/renders/dad-procedural-v1-rejected/). Пользовательская оценка — 1/10; артефакты сохранены только для аудита ошибки процесса.
+- Отдельные технические studies на официальном CC0 Blender human base mesh, не одобренные как likeness и не используемые как production model: [V6](../../assets/renders/dad-head-study-v6/REVIEW.md) и [V7](../../assets/renders/dad-head-study-v7/REVIEW.md). V7 также фиксирует проверку лицензий MPFB2; add-on и его внешние asset packs не импортировались.
 
 Скриншоты из `assets/references/raw/` остаются вспомогательными. Не брать из зелёного фона цвет материала/окружения; не переносить UI или следы хромакея на модель.
 
