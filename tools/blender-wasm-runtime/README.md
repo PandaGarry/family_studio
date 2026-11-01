@@ -1,6 +1,6 @@
 # Blender WebAssembly runtime probe
 
-This is a small browser harness for the pinned `@volter/blender-engine@0.1.148` package. It boots Blender 5.2.0 LTS in a worker, executes the Dad R4 hero-model script through Blender's Python API, asks Blender's native Cycles renderer for full-body front/¾/profile/back and face-closeup previews, then flushes the project as a real `.blend` file.
+This is a small browser harness for the pinned `@volter/blender-engine@0.1.148` package. It boots Blender 5.2.0 LTS in a worker, executes the Dad blockout through Blender's Python API, asks Blender's native Cycles renderer for three previews, then flushes the project as a real `.blend` file.
 
 ## Run locally
 
@@ -18,9 +18,10 @@ Open the Vite address printed in the terminal. The page starts the test automati
 
 - The Vite middleware serves the pinned engine's Brotli assets at `/__editor/blender-wasm/*` with the required MIME and `Content-Encoding` headers.
 - The project bridge stages the preserved Dad reference images in an ignored local workspace and persists the Blender document there while the session runs.
-- Browser writes are limited to the preserved R3 blockout outputs and the R4 hero-model v1 PNGs/`.blend` in the explicit artifact allowlist.
-- R4 outputs, once a browser session successfully completes, are written to `assets/renders/dad-hero-v1/` and `assets/models/dad/dad-hero-v1.blend`; the approved R3 blockout remains preserved separately.
-- R4 v1 is a complete colored static figure for likeness/lookdev review, not yet a production topology, UV-ready, rigged or animated final asset. Its approval gates and known next steps live in [`docs/series/roadmap.md`](../../docs/series/roadmap.md).
+- Browser writes are limited to the three preview PNGs and one `.blend` file in the explicit artifact allowlist.
+- Outputs, once a browser session successfully completes, are written to `assets/renders/dad-blockout/` and `assets/models/dad/`.
+- The active harness rebuilds the R3 neutral Dad blockout, which the user rated 9/10 as a proportion base; it is not a production model/rig/animation.
+- The later full-figure procedural R4 study was rejected by the user at 1/10. It is archived separately and is not run by this harness or used as the next modeling base.
 
 The workspace under `tools/blender-wasm-runtime/workspace/` and `node_modules/` are ignored. No paid render service is required. Engine bytes are served from the installed package, not downloaded by the browser from a cloud renderer.
 

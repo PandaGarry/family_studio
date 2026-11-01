@@ -44,18 +44,17 @@ npm run dev
 
 Эти файлы фиксируют R3 blockout, который пользователь оценил на 9/10 и принял как рабочую основу. Но геометрия всё ещё состоит из primitive shells внутри одного mesh object: нет clean production topology, UV, weights, body/facial rig или анимации. Этот артефакт не является hero model.
 
-## R4: Dad hero model v1 — фактический Blender-run
+## R4 procedural study v1 — технически отрендерен, визуально отвергнут
 
-Отдельно сохранены новые артефакты; исходный R3 blockout не затирался:
+Этот эксперимент сохранён отдельно от R3 для аудита процесса, но не считается рабочей hero-моделью:
 
-- [`assets/models/dad/dad-hero-v1.blend`](../../assets/models/dad/dad-hero-v1.blend) — 2,443,966 bytes; SHA-256 `5e8d93c30b271b81fbd4cca6a7d8a945f4251fc03298576ec8299a9c2c1ec9e7`; отдельная сцена Blender 5.2.0 с полнофигурным цветным статическим персонажем, компонентами головы/лица/волос/бороды/одежды/обуви и review cameras.
-- [`assets/renders/dad-hero-v1/front.png`](../../assets/renders/dad-hero-v1/front.png), [`three-quarter.png`](../../assets/renders/dad-hero-v1/three-quarter.png), [`side.png`](../../assets/renders/dad-hero-v1/side.png), [`back.png`](../../assets/renders/dad-hero-v1/back.png) — native Cycles, 512×896, 64 samples.
-- [`assets/renders/dad-hero-v1/face-closeup.png`](../../assets/renders/dad-hero-v1/face-closeup.png) — native Cycles, 512×512, 80 samples.
-- Сцену строит [`tools/blender-wasm-runtime/src/dad_hero_v1.py`](../../tools/blender-wasm-runtime/src/dad_hero_v1.py); странице harness добавлены пять review views и отдельный artifact allowlist.
+- [`assets/models/dad/rejected/dad-procedural-v1.blend`](../../assets/models/dad/rejected/dad-procedural-v1.blend) — 2,443,966 bytes; SHA-256 `5e8d93c30b271b81fbd4cca6a7d8a945f4251fc03298576ec8299a9c2c1ec9e7`.
+- Его five-view native Cycles renders перемещены в [`assets/renders/dad-procedural-v1-rejected/`](../../assets/renders/dad-procedural-v1-rejected/) (four full-body angles at 512×896/64 samples; face close-up at 512×512/80 samples).
+- Сценарий сохранён как [`tools/blender-wasm-runtime/src/dad_procedural_v1_rejected.py`](../../tools/blender-wasm-runtime/src/dad_procedural_v1_rejected.py). Browser harness снова направлен на R3 blockout, а не на этот отвергнутый output.
 
-Chromium cross-origin isolation и `SharedArrayBuffer` были проверены; Blender 5.2 WASM прочитал предыдущий v1 `.blend`, исполнил Python-сцену и сохранил обновлённый файл. В runtime-логе подтверждены Cycles и разрешения/число samples; полные ракурсы занимали примерно 44–84 секунды, close-up лица — около 75 секунд. Это настоящие Cycles render frames, не скриншоты Blender UI.
+Runtime факт: Chromium isolation подтверждена; Blender 5.2 WASM прочитал `.blend`, исполнил Python, выполнил Cycles и сохранил файлы. Это говорит только о технической работоспособности. Пользователь оценил визуальный результат на **1/10** из-за колоссального расхождения с исходным образом. Причина — неправильный метод: простые параметрические shells/детали собраны напрямую по догадке, без точного side-by-side match и проверки головы до полной фигуры. Ни оболочки, ни script, ни renders не использовать как стартовую геометрию/визуальную цель.
 
-**Честный статус R4:** v1 — первый полный статический 3D-образ, не профессиональная финальная модель и не sign-off likeness. Силуэт/лицо/волосы/борода требуют дальнейшего сравнения с references; некоторые поверхности пока процедурные и упрощённые. Нет утверждённой production retopology, UV, armature, weights, facial controls или движения. Следующая итерация — улучшить likeness и органичность геометрии, после чего отдельно пройти topology, rig и motion gates из [`roadmap.md`](roadmap.md). Никакой Cycles beauty render не заменяет эти проверки.
+Исправленный R4 process: продолжать от принятого R3 proportion base, выровнять reference landmarks, затем сделать отдельное sculpt/modeling исследование головы в нескольких ракурсах и получить likeness approval до волос, одежды и full body. «Blender выполнил script» не является доказательством качества персонажа.
 
 ## Лицензия
 

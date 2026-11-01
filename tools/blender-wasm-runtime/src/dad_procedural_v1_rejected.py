@@ -4,9 +4,9 @@ from mathutils import Vector, Matrix
 
 PROJECT_ROOT = r"__FAMILY_STUDIO_PROJECT_ROOT__"
 
-# R4 hero-model iteration v1: a complete, colored, static 3D figure built in
-# Blender Python from Family Studio's local Dad references. This is not a rigged
-# production asset yet; topology and deformation still require their own gates.
+# ARCHIVED / REJECTED: R4 procedural study v1, rated 1/10 by the user.
+# Kept only to document the failed approach; do not use its geometry as a base.
+# The script is not the active runtime entry point or an approved character.
 for obj in list(bpy.data.objects):
     bpy.data.objects.remove(obj, do_unlink=True)
 for collection in list(bpy.data.collections):
@@ -20,8 +20,8 @@ for material in list(bpy.data.materials):
     bpy.data.materials.remove(material)
 
 scene = bpy.context.scene
-scene.name = "Dad — R4 hero model v1"
-scene["family_studio_stage"] = "R4 hero model v1 — static; likeness and technical gates pending"
+scene.name = "Dad — REJECTED R4 procedural study v1"
+scene["family_studio_stage"] = "Rejected by user: 1/10; archive only, do not use as model base"
 scene["family_studio_costume_override"] = "warm light gray crewneck, no hood"
 scene["family_studio_reference"] = "assets/references/character-masters/characters/dad"
 scene.render.engine = "CYCLES"
@@ -32,7 +32,7 @@ scene.render.resolution_y = 896
 scene.render.resolution_percentage = 100
 scene.render.image_settings.file_format = "PNG"
 scene.render.film_transparent = False
-scene.render.filepath = "//renders/dad-hero-v1/"
+scene.render.filepath = "//renders/dad-procedural-v1-rejected/"
 scene.view_settings.view_transform = "AgX"
 scene.world = scene.world or bpy.data.worlds.new("Dad R4 studio world")
 scene.world.use_nodes = True
@@ -648,4 +648,4 @@ for image in list(bpy.data.images):
 
 scene.frame_set(1)
 bpy.context.view_layer.update()
-print("FAMILY_STUDIO_HERO_MODEL_READY: Dad R4 hero model v1 created with full body, identity details, light crewneck, dark jeans and brown sneakers; static, clean topology and rig gates still pending.")
+print("FAMILY_STUDIO_REJECTED_STUDY: archived procedural R4 v1; rated 1/10, not an approved model or production base.")

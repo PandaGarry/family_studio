@@ -1,5 +1,5 @@
 import { BlenderRuntime } from '@volter/blender-engine/browser';
-import buildDadScript from './dad_hero_v1.py?raw';
+import buildDadScript from './dad_blockout.py?raw';
 import './style.css';
 
 const statusNode = document.querySelector('#status');
@@ -104,31 +104,29 @@ async function buildAndRender() {
 
     await report('info', `Starting ${config.blender}; project root: ${projectRoot}`);
     setStatus('Загрузка Blender WebAssembly…', 8);
-    const started = await runtime.start(projectRoot, 'models/dad-hero-v1.blend');
+    const started = await runtime.start(projectRoot, 'models/dad-blockout.blend');
     await report('ready', 'BlenderRuntime.start() resolved.', { started });
     setStatus('Blender запущен · строю 3D-сцену…', 45);
     progressNode.style.width = '48%';
 
     const configPlaceholder = '__FAMILY_STUDIO_PROJECT_ROOT__';
     const python = buildDadScript.replace(configPlaceholder, projectRoot.replaceAll('\\', '\\\\'));
-    const execution = await runtime.execute(python, true, 'Build the Dad R4 hero model v1');
-    await report('python', 'Blender Python R4 hero-model script executed.', { result: String(execution).slice(0, 1200) });
+    const execution = await runtime.execute(python, true, 'Build the Dad R3 gray blockout');
+    await report('python', 'Blender Python blockout script executed.', { result: String(execution).slice(0, 1200) });
     if (typeof execution === 'string' && /Error executing code|Traceback \(most recent call last\)/i.test(execution)) {
       throw new Error(execution);
     }
 
     const views = [
-      { camera: 'CAM_Front', title: 'Full figure · Front · Cycles', file: 'dad-hero-v1-front.png', width: 512, height: 896, samples: 64 },
-      { camera: 'CAM_ThreeQuarter', title: 'Full figure · ¾ · Cycles', file: 'dad-hero-v1-three-quarter.png', width: 512, height: 896, samples: 64 },
-      { camera: 'CAM_Profile', title: 'Full figure · Profile · Cycles', file: 'dad-hero-v1-side.png', width: 512, height: 896, samples: 64 },
-      { camera: 'CAM_Back', title: 'Full figure · Back · Cycles', file: 'dad-hero-v1-back.png', width: 512, height: 896, samples: 64 },
-      { camera: 'CAM_FaceCloseup', title: 'Face close-up · Cycles', file: 'dad-hero-v1-face.png', width: 512, height: 512, samples: 80 },
+      { camera: 'CAM_Front', title: 'Front · Cycles', file: 'dad-blockout-front.png' },
+      { camera: 'CAM_ThreeQuarter', title: 'Three-quarter · Cycles', file: 'dad-blockout-three-quarter.png' },
+      { camera: 'CAM_Profile', title: 'Profile · Cycles', file: 'dad-blockout-side.png' },
     ];
     for (let index = 0; index < views.length; index += 1) {
       const view = views[index];
-      setStatus(`Cycles render ${index + 1}/${views.length}: ${view.title}`, 52 + index * 8);
+      setStatus(`Cycles render ${index + 1}/${views.length}: ${view.title}`, 52 + index * 13);
       await report('render', `Starting native Cycles preview: ${view.camera}`);
-      const { png, metadata } = await renderCamera(view.camera, view.width, view.height, view.samples);
+      const { png, metadata } = await renderCamera(view.camera, 360, 640, 32);
       const saved = await uploadPreview(view.file, png);
       addRender(view.title, view.file, png);
       await report('rendered', `${metadata.renderer} ${metadata.width}×${metadata.height}, ${metadata.samples} samples, ${metadata.seconds.toFixed(2)} s; saved ${saved.path} (${saved.bytes} bytes).`);
@@ -137,14 +135,14 @@ async function buildAndRender() {
     setStatus('Cycles готов · сохраняю .blend…', 92);
     await runtime.stop();
     runtime = null;
-    const published = await fetch('/api/publish-document?name=dad-hero-v1.blend', { method: 'POST' });
+    const published = await fetch('/api/publish-document?name=dad-blockout.blend', { method: 'POST' });
     if (!published.ok) throw new Error(`Could not publish .blend: HTTP ${published.status} ${await published.text()}`);
     const artifact = await published.json();
     const modelLink = document.createElement('p');
     modelLink.className = 'model-link';
-    modelLink.innerHTML = `Настоящий Blender hero-model файл сохранён: <a href="/api/artifacts/dad-hero-v1.blend" download>dad-hero-v1.blend</a> · ${artifact.bytes.toLocaleString()} bytes · <code>${artifact.path}</code>`;
+    modelLink.innerHTML = `Настоящий Blender-файл сохранён: <a href="/api/artifacts/dad-blockout.blend" download>dad-blockout.blend</a> · ${artifact.bytes.toLocaleString()} bytes · <code>${artifact.path}</code>`;
     rendersNode.before(modelLink);
-    setStatus('Готово · R4 hero model v1 · Blender Python + native Cycles подтверждены', 100);
+    setStatus('Готово · Blender Python + native Cycles подтверждены', 100);
     await report('complete', `Verified Blender WASM, Python execution, native Cycles and .blend save: ${artifact.path}.`, artifact);
   } catch (error) {
     const message = safeError(error);

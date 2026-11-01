@@ -6,11 +6,11 @@
 
 ## Текущее состояние — 2026-11-01
 
-**Фаза:** R4 — полноценная high-quality 3D-фигура папы; затем topology/lookdev, rig и motion proof.
+**Фаза:** перезапуск R4 по reference-driven процессу: сначала голова/сходство, затем полная фигура, production topology, rig и motion proof.
 
-**Сейчас:** Blender 5.2 WASM/Python/Cycles/.blend подтверждены. Пользователь оценил gray blockout на **9/10** и поручил довести папу до чёткой, качественной, профессионально подготовленной 3D-фигуры.
+**Сейчас:** пользователь оценил R3 gray blockout на **9/10** как рабочую основу. Последующий процедурный R4 v1 получил от пользователя **1/10 и однозначно отвергнут** за большое расхождение с референсом. Это моя ошибка процесса: сборка процедурных форм выдана за hero-model iteration без достаточной сверки сходства.
 
-**Граница одобрения:** 9/10 — approval R3 blockout как основы, не финального дизайна. Отдельный R4 hero-model v1 уже создан и отрендерен из Blender Cycles; это статическая draft-фигура без sign-off, production retopology, UV, weights, rig или animation. «Идеал» разбит на проверяемые ворота: likeness, геометрия/силуэт, materials, topology, rig/deformation, motion и рендер. Детали runtime — в [`blender-wasm-runtime.md`](blender-wasm-runtime.md).
+**Граница одобрения:** R3 — единственная одобренная 3D-основа. R4 v1 перемещён в `assets/models/dad/rejected/` и `assets/renders/dad-procedural-v1-rejected/` только как отклонённый архив; его формы и код не использовать как старт для доработки. Следующий шаг — точное сравнение с master references и новая работа с головой, сначала в 3 видах и только после одобрения — тело/одежда. Детали runtime — в [`blender-wasm-runtime.md`](blender-wasm-runtime.md).
 
 ## Этапы и контрольные ворота
 
@@ -20,7 +20,7 @@
 | R1 | ✅ Готово | Зафиксировать и проверить локальные character masters; изучить legacy 3D prototype | У папы/мамы/сына есть неизменённые reference-файлы и provenance; старый NumPy prototype помечен как справочник, а не Blender asset |
 | R2 | 🟡 В работе | Подготовить авторский brief первого героя — папы | Визуальные якоря, одежда и нерешённые детали записаны; пользователь подтвердил светлый crewneck без капюшона |
 | R3 | ✅ Blockout accepted as working base (9/10) | Зафиксировать первый серый 3D blockout папы и проверить runtime | Blender Python, native Cycles front/¾/profile и reopen `.blend` подтверждены; пользователь дал 9/10. Это одобрение основы для продолжения, не production-модели |
-| R4 | 🟡 В работе · hero-model v1 создан | Построить выразительную полноценную фигуру папы: форма головы/лица, волосы, борода, анатомия, crewneck, джинсы и обувь | R4 v1 в `assets/models/dad/dad-hero-v1.blend`; 5 native Cycles views в `assets/renders/dad-hero-v1/`. Дальше — likeness/shape iteration; критерий закрытия: утверждённые front/¾/profile/back и close-up, без видимых дефектов формы |
+| R4 | 🔴 Перезапуск · процедурный v1 отвергнут (1/10) | Reference-driven head/likeness сначала; полная фигура только после approval головы и силуэта | Голова совпадает с локальными face/front/¾/profile masters по landmarks и силуэту; один и тот же дизайн читается во всех ракурсах и одобрен пользователем. Отклонённый v1 — только архив, не база |
 | R5 | ⏸ После identity/shape sign-off | Подготовить production asset: чистая организованная геометрия, UV, материалы, одежда и сценовая упаковка | Названные компоненты, подходящая топология для деформаций, чистые UV/material slots, без z-fighting/clipping в базовых позах; отдельный review board |
 | R6 | ⏸ После R5 | Собрать body rig и facial rig | Проверены eye aim, полноценный blink с веками, brows/jaw controls, базовые visemes; устойчивые деформации тела/одежды |
 | R7 | ⏸ После R6 | Анимационный proof: idle, взгляд, поворот, жест, 2–3 шага | Непрерывное движение одного рига; стопы не скользят, лицо/кисти/одежда не ломаются; Blender-рендер фактически получен и проверен |
@@ -29,11 +29,11 @@
 
 ## Ближайшие действия
 
-1. Уточнить v1 по reference comparison: органичнее hairline/пряди и beard silhouette, улучшить лицо и сопряжение голова–шея–плечи; сверять face/front/side crops.
-2. Полировать full figure: сделать более естественные пропорции/складки одежды, кисти, форму джинсов/обуви; затем сделать общий lineup-scale check с простыми силуэтами мамы/сына.
-3. На каждом вороте получать реальные Blender-рендеры front / ¾ / profile / back / close-up; после identity sign-off перейти к clean topology/UV/materials, затем к body/facial rig и motion proof.
+1. Зафиксировать причины оценки 1/10 и сверить исходный R3 base с неизменёнными face/front/¾/profile masters; создать landmark sheet/план совпадений, прежде чем менять геометрию.
+2. Пересобрать только голову как sculpt/modeling study с крупными объёмами и реальным профилем; сравнивать три вида при совпадающем масштабе, не добавлять волосы, beard groom и материалы до одобрения формы.
+3. После явного head/likeness approval продолжить тело и одежду; затем topology/UV/materials, body/facial rig и motion. Каждый gate подтверждать Blender-рендерами, не procedural preview без side-by-side проверки.
 
-Не объявлять «идеал» готовым по одному красивому ракурсу: проверять силуэт, likeness, техническую чистоту, деформации и движение отдельно.
+Отклонённый v1 не подправлять косметически: расхождение системное. Новую итерацию начинать с R3 accepted base и reference measurements, а не с failed R4 geometry.
 
 ## Решения, которые считаются зафиксированными
 

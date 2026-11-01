@@ -17,12 +17,6 @@ const published = {
   'dad-blockout-front.png': path.join(repoRoot, 'assets/renders/dad-blockout/front.png'),
   'dad-blockout-three-quarter.png': path.join(repoRoot, 'assets/renders/dad-blockout/three-quarter.png'),
   'dad-blockout-side.png': path.join(repoRoot, 'assets/renders/dad-blockout/side.png'),
-  'dad-hero-v1.blend': path.join(repoRoot, 'assets/models/dad/dad-hero-v1.blend'),
-  'dad-hero-v1-front.png': path.join(repoRoot, 'assets/renders/dad-hero-v1/front.png'),
-  'dad-hero-v1-three-quarter.png': path.join(repoRoot, 'assets/renders/dad-hero-v1/three-quarter.png'),
-  'dad-hero-v1-side.png': path.join(repoRoot, 'assets/renders/dad-hero-v1/side.png'),
-  'dad-hero-v1-back.png': path.join(repoRoot, 'assets/renders/dad-hero-v1/back.png'),
-  'dad-hero-v1-face.png': path.join(repoRoot, 'assets/renders/dad-hero-v1/face-closeup.png'),
 };
 
 function json(res, status, value) {
@@ -230,8 +224,8 @@ async function handle(req, res, next) {
 
     if (pathname === '/api/publish-document' && req.method === 'POST') {
       const name = url.searchParams.get('name');
-      if (name !== 'dad-hero-v1.blend') return json(res, 404, { error: 'Document name is not in the allowlist' });
-      const source = path.join(workspace, 'models/dad-hero-v1.blend');
+      if (name !== 'dad-blockout.blend') return json(res, 404, { error: 'Document name is not in the allowlist' });
+      const source = path.join(workspace, 'models/dad-blockout.blend');
       const destination = published[name];
       const bytes = await readFile(source);
       await mkdir(path.dirname(destination), { recursive: true });
@@ -280,6 +274,6 @@ const isolationHeaders = {
 export default defineConfig({
   root: toolRoot,
   plugins: [blenderRuntimePlugin()],
-  server: { host: '0.0.0.0', port: 5173, strictPort: true, allowedHosts: true, headers: isolationHeaders, watch: { ignored: ['**/workspace/**'] } },
+  server: { host: '0.0.0.0', port: 5173, strictPort: true, allowedHosts: true, headers: isolationHeaders },
   preview: { host: '0.0.0.0', port: 4173, strictPort: true, allowedHosts: true, headers: isolationHeaders },
 });

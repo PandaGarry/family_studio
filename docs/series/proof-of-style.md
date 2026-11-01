@@ -20,7 +20,18 @@
 
 ## Технический Blender smoke test (не proof-of-style)
 
-2026-11-01 подтверждён Blender 5.2.0 WebAssembly runtime в Chromium: Blender Python создал серый Dad blockout, Cycles отрендерил front/¾/profile, `.blend` сохранён и повторно открыт. Пользователь оценил blockout на 9/10 и принял как основу. После этого создан отдельный R4 hero-model v1: полная цветная статическая фигура с пятью native Cycles views и собственным `.blend`. Это progress asset для likeness/lookdev, **не** финальный proof-of-style: likeness ещё не sign-off, topology/UV/rig/animation не готовы. Подробности/артефакты — в [`blender-wasm-runtime.md`](blender-wasm-runtime.md).
+2026-11-01 подтверждён Blender 5.2.0 WebAssembly runtime в Chromium: Blender Python создал серый Dad blockout, Cycles отрендерил front/¾/profile, `.blend` сохранён и повторно открыт. Пользователь оценил R3 blockout на 9/10 и принял как основу. Позднее процедурный R4 v1 был собран и технически отрендерен, но пользователь оценил визуальный результат на **1/10 и отверг** за колоссальное расхождение с reference. Он перемещён в rejected archive; это не baseline и не proof-of-style. Вывод: успешный Blender script/рендер не равен сходству или профессиональной модели. Следующий R4 — head-first modeling с точной side-by-side проверкой до полного тела. Подробности — в [`blender-wasm-runtime.md`](blender-wasm-runtime.md).
+
+## Разбор отклонённого R4 procedural study (оценка пользователя 1/10)
+
+Причина не в Cycles или экспорте `.blend`: Blender технически запустился и отрендерил сцену. Ошибка — в моделировании и принятом порядке:
+
+- целая фигура была собрана одним процедурным скриптом из примитивных/пересекающихся объёмов вместо sculpted формы, выверенной по turnaround;
+- я оценивал черты по памяти и приблизительным координатам, не остановился на обязательном side-by-side likeness gate по голове в front/¾/profile;
+- стилизованные детали, одежда и студийный свет появились до того, как голова и силуэт были подтверждены;
+- цветной beauty render был принят за достаточный прогресс, хотя геометрия/силуэт резко расходились с master.
+
+**Исправление:** прекратить косметически полировать этот failed mesh; оставить его только в rejected archive. Продолжать от R3 базы: align references и landmarks, смоделировать только голову, сначала проверить большие формы в одинаковых ракурсах, получить одобрение пользователя, и лишь затем добавлять волосы/бороду, full body, одежду и технические стадии. Python подходит для повторяемой сцены, тестов и рендера — не подменяет ручное моделирование и art direction.
 
 ## Legacy procedural 3D prototype
 
