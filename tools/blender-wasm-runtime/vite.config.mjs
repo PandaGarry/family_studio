@@ -19,6 +19,15 @@ const archivedArtifacts = {
   'dad-blockout-r3-rejected-side.png': path.join(repoRoot, 'assets/renders/dad-blockout-r3-rejected/side.png'),
 };
 
+const candidateArtifacts = {
+  'dad-head-study-v1.blend': path.join(repoRoot, 'assets/models/dad/studies/dad-head-study-v1.blend'),
+  'dad-head-study-v1-front.png': path.join(repoRoot, 'assets/renders/dad-head-study-v1/front.png'),
+  'dad-head-study-v1-three-quarter.png': path.join(repoRoot, 'assets/renders/dad-head-study-v1/three-quarter.png'),
+  'dad-head-study-v1-profile.png': path.join(repoRoot, 'assets/renders/dad-head-study-v1/profile.png'),
+  'dad-head-study-v1-face-closeup.png': path.join(repoRoot, 'assets/renders/dad-head-study-v1/face-closeup.png'),
+  'dad-head-study-v1-review-board.png': path.join(repoRoot, 'assets/renders/dad-head-study-v1/review-board.png'),
+};
+
 function json(res, status, value) {
   res.statusCode = status;
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
@@ -58,7 +67,7 @@ async function listWorkspace(dir = workspace, prefix = '') {
 async function ensureWorkspace() {
   await mkdir(path.join(workspace, 'models'), { recursive: true });
   await mkdir(path.join(workspace, 'references'), { recursive: true });
-  for (const name of ['front.png', 'side.png', 'face.png', 'turnaround.png']) {
+  for (const name of ['front.png', 'three_quarter.png', 'side.png', 'face.png', 'turnaround.png']) {
     const source = path.join(references, name);
     const destination = path.join(workspace, 'references', `dad-${name}`);
     let sourceStat;
@@ -213,16 +222,29 @@ async function handle(req, res, next) {
     }
 
     if (pathname.startsWith('/api/artifacts/') && req.method === 'POST') {
-      return json(res, 410, { error: 'Artifact publishing is disabled while no Dad model is approved' });
+      const name = pathname.slice('/api/artifacts/'.length);
+      const destination = candidateArtifacts[name];
+      if (!destination || !name.endsWith('.png')) return json(res, 410, { error: 'Only allowlisted head-study v1 PNG evidence can be published' });
+      const bytes = await bodyBytes(req, 32 * 1024 * 1024);
+      await mkdir(path.dirname(destination), { recursive: true });
+      await writeFile(destination, bytes);
+      return json(res, 201, { path: path.relative(repoRoot, destination), bytes: bytes.length });
     }
 
     if (pathname === '/api/publish-document' && req.method === 'POST') {
-      return json(res, 410, { error: 'Publishing the rejected blockout is disabled' });
+      const name = url.searchParams.get('name');
+      if (name !== 'dad-head-study-v1.blend') return json(res, 410, { error: 'Only the allowlisted unapproved head study can be published' });
+      const source = path.join(workspace, 'models/dad-head-study-v1.blend');
+      const destination = candidateArtifacts[name];
+      const bytes = await readFile(source);
+      await mkdir(path.dirname(destination), { recursive: true });
+      await writeFile(destination, bytes);
+      return json(res, 201, { path: path.relative(repoRoot, destination), bytes: bytes.length });
     }
 
     if (pathname.startsWith('/api/artifacts/') && req.method === 'GET') {
       const name = pathname.slice('/api/artifacts/'.length);
-      const destination = archivedArtifacts[name];
+      const destination = archivedArtifacts[name] ?? candidateArtifacts[name];
       if (!destination) return json(res, 404, { error: 'Artifact name is not in the allowlist' });
       const bytes = await readFile(destination);
       res.statusCode = 200;

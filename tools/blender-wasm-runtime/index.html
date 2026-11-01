@@ -4,35 +4,52 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark" />
-    <title>Family Studio — Dad model status</title>
+    <title>Family Studio — Dad head study v1</title>
   </head>
   <body>
     <main class="shell">
       <header>
-        <p class="eyebrow">FAMILY STUDIO / CHARACTER PIPELINE</p>
-        <h1>Папа · подготовка профессиональной 3D-итерации</h1>
-        <p class="lede">Задача — не получить ещё один процедурный blockout, а точно перенести утверждённый 2D/2.5D дизайн в объёмную модель, сохранив все видимые особенности и проверив сходство во всех ракурсах.</p>
+        <p class="eyebrow">FAMILY STUDIO / REFERENCE-DRIVEN HEAD STUDY</p>
+        <h1>Папа · новая итерация головы</h1>
+        <p class="lede">Проверяю новую независимую форму головы в Blender WASM. Утверждённые master-изображения вложены в сцену как ориентиры, но 934 силуэтных измерения ещё не перенесены в координаты этой геометрии. R3/R4 не используются.</p>
       </header>
       <section class="notice" role="status">
-        <strong>Нет одобренной 3D-базы</strong>
-        <span>R3 blockout, ранее принятый как рабочая основа, теперь также отклонён как неподходящий старт. Процедурный R4 v1 отклонён ранее. Оба набора сохранены только в архиве; эта страница больше не запускает и не пересобирает их.</span>
+        <strong>Кандидат на review · не одобрен</strong>
+        <span>Скрипт создаёт custom loft/sweep meshes и реальные Cycles-рендеры: front, ¾, profile и face close-up. Это Blender Python authoring, не ручной sculpt и не утверждение о likeness; оцениваем только после просмотра изображений.</span>
       </section>
-      <section class="workflow">
-        <h2>Следующий профессиональный этап</h2>
-        <ol>
-          <li>Разобрать master references: единый масштаб ракурсов, landmarks, силуэты, детали лица/волос/бороды/одежды и список того, чего изображения не показывают.</li>
-          <li>Собрать новую авторскую 3D-форму в полноценном Blender sculpt/modeling workflow — без использования отвергнутой геометрии как базы.</li>
-          <li>Проверить её side-by-side с front / ¾ / profile и крупным face crop; отдельно оценить лицо, объём одежды, свисающие рукава, посадку брюк, материалы и свет.</li>
-          <li>Не переходить к production topology/UV, rig и animation до визуального одобрения дизайна.</li>
-        </ol>
+      <section class="actions">
+        <button id="build" type="button">Запустить Blender и получить рендеры</button>
+        <span id="status" role="status">Проверяю среду Blender WebAssembly…</span>
+      </section>
+      <section class="progress-wrap" aria-label="Прогресс запуска Blender">
+        <div id="progress" class="progress"></div>
       </section>
       <section class="notice secondary-notice">
-        <strong>Технический статус</strong>
-        <span>Blender WebAssembly и Cycles ранее были технически проверены. Это не подтверждает качество модели. Интерактивный native Blender sculpting в текущей среде не подтверждён, поэтому Python-примитивы не будут выдавать за замену ручного моделирования.</span>
+        <strong>Итог первой проверки</strong>
+        <span>Блендер и Cycles отработали, но сам визуальный проход не прошёл gate сходства: волосы получились шипами, борода — цельной маской, а лицо не передаёт master. Ниже показан именно этот честный диагностический результат, не одобренная модель.</span>
       </section>
+      <section id="renders" class="renders" aria-live="polite">
+        <figure><img src="/api/artifacts/dad-head-study-v1-front.png" alt="Blender Cycles front render — unapproved study" /><figcaption>Front · unapproved study</figcaption><a href="/api/artifacts/dad-head-study-v1-front.png" download>PNG</a></figure>
+        <figure><img src="/api/artifacts/dad-head-study-v1-three-quarter.png" alt="Blender Cycles three-quarter render — unapproved study" /><figcaption>Three-quarter · unapproved study</figcaption><a href="/api/artifacts/dad-head-study-v1-three-quarter.png" download>PNG</a></figure>
+        <figure><img src="/api/artifacts/dad-head-study-v1-profile.png" alt="Blender Cycles profile render — unapproved study" /><figcaption>Profile · unapproved study</figcaption><a href="/api/artifacts/dad-head-study-v1-profile.png" download>PNG</a></figure>
+        <figure><img src="/api/artifacts/dad-head-study-v1-face-closeup.png" alt="Blender Cycles face close-up — unapproved study" /><figcaption>Face close-up · unapproved study</figcaption><a href="/api/artifacts/dad-head-study-v1-face-closeup.png" download>PNG</a></figure>
+      </section>
+      <p class="model-link">Мультиракурсный лист: <a href="/api/artifacts/dad-head-study-v1-review-board.png" download>dad-head-study-v1-review-board.png</a> · исходник сцены: <a href="/api/artifacts/dad-head-study-v1.blend" download>dad-head-study-v1.blend</a>. Оба материала предназначены только для review, не для production.</p>
+      <section class="workflow">
+        <h2>Проверка перед любыми следующими этапами</h2>
+        <ol>
+          <li>Сходство силуэта и landmark-положений сверяется по всем четырём ракурсам; face close-up — для глаз, век, носа, бровей, усов и бороды.</li>
+          <li>Это детальная геометрическая гипотеза, а не финальный профессиональный персонаж. Пропорции и мелкие формы остаются на корректировку по вашему review.</li>
+          <li>Никакие модель, topology, материалы или рендер не считаются принятыми, пока вы не оцените PNG. Светлый crewneck подтверждён ранее; эта итерация ограничена головой.</li>
+        </ol>
+      </section>
+      <details>
+        <summary>Журнал запуска / техническая диагностика</summary>
+        <pre id="log"></pre>
+      </details>
       <footer>
-        <span>Local-first • без обязательного облачного генератора</span>
-        <span>Blender 5.2.0 WASM • technical harness paused pending approved workflow</span>
+        <span>Local-first · платное облако не требуется</span>
+        <span>Blender 5.2.0 LTS WASM · native Cycles · кандидат не утверждён</span>
       </footer>
     </main>
     <script type="module" src="/src/main.js"></script>
