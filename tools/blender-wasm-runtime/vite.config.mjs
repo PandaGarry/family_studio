@@ -32,6 +32,10 @@ const candidateArtifacts = {
   'dad-head-study-v2-profile.png': path.join(repoRoot, 'assets/renders/dad-head-study-v2/profile.png'),
   'dad-head-study-v2-face-closeup.png': path.join(repoRoot, 'assets/renders/dad-head-study-v2/face-closeup.png'),
   'dad-head-study-v2-review-board.png': path.join(repoRoot, 'assets/renders/dad-head-study-v2/review-board.png'),
+  'dad-head-study-v4-front.png': path.join(repoRoot, 'assets/renders/dad-head-study-v4/front.png'),
+  'dad-head-study-v4-three-quarter.png': path.join(repoRoot, 'assets/renders/dad-head-study-v4/three-quarter.png'),
+  'dad-head-study-v4-profile.png': path.join(repoRoot, 'assets/renders/dad-head-study-v4/profile.png'),
+  'dad-head-study-v4-face-closeup.png': path.join(repoRoot, 'assets/renders/dad-head-study-v4/face-closeup.png'),
 };
 
 function json(res, status, value) {
