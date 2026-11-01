@@ -8,6 +8,7 @@
 - [Анализ творческих ориентиров](docs/series/influence-analysis.md) — принципы выбранных мультсериалов и собственное направление без копирования.
 - [Визуальная библия персонажей](docs/series/character-bible.md) — предварительный разбор образов, неутверждённый канон.
 - [3D-пайплайн персонажей и рига](docs/series/3d-character-pipeline.md) — моделирование, facial rig, анимация и проверки качества.
+- [Проверка Blender WebAssembly runtime](docs/series/blender-wasm-runtime.md) — подготовленный harness, ограничения текущего browser preview и честный статус smoke test.
 - [Ревизия и перенос из docuflow](docs/series/docuflow-migration-review.md) — что перенесено, что только технический справочник и почему старый NumPy-рендер не является Blender-proof.
 - [Бриф первой 3D-модели: папа](docs/series/dad-3d-model-brief.md) — визуальные якоря, вопросы канона и approval gates.
 - [Бриф следующего героя: мальчик](docs/series/child-3d-model-brief.md) — заготовка для этапа после папы.

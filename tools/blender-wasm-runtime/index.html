@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>Family Studio — Blender runtime test</title>
+  </head>
+  <body>
+    <main class="shell">
+      <header>
+        <p class="eyebrow">FAMILY STUDIO / CHARACTER PIPELINE</p>
+        <h1>Папа · Blender 3D blockout</h1>
+        <p class="lede">Проверка настоящего Blender 5.2 LTS, собранного в WebAssembly. По кнопке сцена строится из Blender Python API, сохраняется в .blend и рендерится Cycles.</p>
+      </header>
+      <section class="notice">
+        <strong>Черновой этап R3</strong>
+        <span>Серый объёмный blockout, не финальный дизайн и не анимация. Референсы: front / ¾ / profile; силуэт предстоит согласовать до рига.</span>
+      </section>
+      <section class="actions">
+        <button id="build" type="button">Запустить Blender и собрать blockout</button>
+        <span id="status" role="status">Ожидание запуска…</span>
+      </section>
+      <section class="progress-wrap" aria-label="Blender startup progress">
+        <div id="progress" class="progress"></div>
+      </section>
+      <section id="renders" class="renders" aria-live="polite"></section>
+      <details>
+        <summary>Журнал запуска / диагностика</summary>
+        <pre id="log"></pre>
+      </details>
+      <footer>
+        <span>Local-first • без облачного рендер-сервиса</span>
+        <span>WASM engine: GPL-3.0-or-later • Blender 5.2.0 LTS</span>
+      </footer>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

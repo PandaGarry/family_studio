@@ -18,6 +18,10 @@
 
 Пока эти критерии не пройдены, никакой эскиз/композит не объявляется готовой анимацией.
 
+## Технический Blender smoke test (не proof-of-style)
+
+2026-11-01 подтверждён Blender 5.2.0 WebAssembly runtime в Chromium: Blender Python создал серый 3D blockout папы, Cycles отрендерил front/¾/profile, `.blend` сохранён и повторно открыт. Это проверка запуска и обмена файлами, **не** proof-of-style: primitive shells, качество лица/силуэта не утверждено, rig и движение отсутствуют. Подробности/артефакты — в [`blender-wasm-runtime.md`](blender-wasm-runtime.md).
+
 ## Связь с 3D-экспериментом из `docuflow`
 
 В исходном проекте найден более ранний программный mesh/rasterizer и 21-костный Python-риг. Это не Blender-файл: в источнике нет `.blend` или Godot project, а журнал `docuflow` отмечает недостаточное качество этого прототипа. Его движения/IK и параметрические числа можно проверять как технический справочник, но не считать одобренным proof-of-style для Family Studio. Подробности и переносимые исходные masters — в [`docuflow-migration-review.md`](docuflow-migration-review.md).

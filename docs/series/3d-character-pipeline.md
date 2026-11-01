@@ -43,4 +43,4 @@
 
 ## Текущее ограничение окружения
 
-В данном sandbox сейчас нет исполняемого Blender, Godot или FFmpeg. Следовательно, новый тест должен быть построен как Blender-сцена/скрипт и не может называться проверенным render, пока доступен совместимый runtime. Старый cutout-preview из `proof-of-style.md` отклонён и удалён.
+В shell sandbox нет нативного Blender/Godot/FFmpeg, но Blender 5.2 WASM harness прошёл headless Chromium smoke test: Python script, native Cycles и сохранение/повторное открытие `.blend` подтверждены. Созданный coarse blockout не принят как визуально утверждённый дизайн и не закрывает R3; технические детали и рендеры — в [`blender-wasm-runtime.md`](blender-wasm-runtime.md). Старый cutout-preview из `proof-of-style.md` по-прежнему отклонён и удалён.
