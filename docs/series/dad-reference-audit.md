@@ -17,6 +17,16 @@ Use only these unchanged local master files as the primary design references:
 - `assets/references/character-masters/characters/dad/face.png` — face close-up for facial landmarks, hairline, beard contour, skin, and eye details.
 - `assets/references/character-masters/characters/dad/character.json` — palette and identity metadata. Its `height_heads: 5.9` and normalized `art.face` coordinates are guides, not a surveyed 3D measurement. The file is immutable; the light crewneck/no-hood decision is a separate user override.
 
+## Measured silhouette data
+
+I extracted **934 image-space outer-silhouette samples** from the untouched `front.png`, `three_quarter.png` and `side.png` alpha channels (alpha ≥128, every 2 px). CSV and source-hash manifest:
+
+- [`dad-silhouette-profiles.csv`](../../assets/references/character-masters/characters/dad/derived/dad-silhouette-profiles.csv)
+- [`dad-silhouette-profiles.manifest.json`](../../assets/references/character-masters/characters/dad/derived/dad-silhouette-profiles.manifest.json)
+- Reproducible utility: [`tools/reference-audit/`](../../tools/reference-audit/README.md)
+
+This is a measured constraint set, **not a model**. It only stores image-space outer bounds; transparent gaps inside a silhouette are collapsed. The three-quarter view is for visual cross-checking, not an orthographic depth profile. World scale and unseen surfaces remain unresolved until explicitly reviewed.
+
 ## Visual fidelity checklist
 
 | Priority | Reference feature to preserve | Required check |
@@ -40,6 +50,13 @@ Use only these unchanged local master files as the primary design references:
 | Beard appears glued on | Build a volumetric beard mass with a reference-matched cheek/chin silhouette and integrated moustache; layer clumps/groom only after mass is right | Front/profile close-ups under neutral light |
 | Render reads like an unfinished test | Use clean camera, framing, color management, soft key/fill/rim and finished materials only after geometry is credible | Separate geometry review and final lookdev board |
 
+## Как учитывать будущие корректировки и изображения
+
+- Новые изображения от пользователя/других ИИ сначала считаются **предложениями**, а не автоматической заменой утверждённых master files.
+- Для каждой картинки фиксировать intended change (например, только форма рукава, только нос, новый ракурс) и проверять, не противоречит ли она уже locked features.
+- Если новая картинка конфликтует с face/beard/hairline/ear locks, не смешивать источники молча: зафиксировать различие и следовать прямому решению пользователя о том, что теперь канон.
+- PNG-рендеры каждой итерации должны иметь номер версии и одинаковые camera/scale; так пользователь сможет корректировать конкретный defect, а не весь результат абстрактно.
+
 ## Review gates
 
 1. **Reference lock:** align source crops by eye centers, nose base, mouth, chin, hairline, shoulder line, waist and feet. Record any crop/perspective mismatch rather than silently warping a master.
@@ -48,10 +65,12 @@ Use only these unchanged local master files as the primary design references:
 4. **Lookdev gate:** neutral clay and material views must both pass. A polished render cannot compensate for geometry mismatch.
 5. **Production gate:** only after design approval proceed to retopology/UV, materials, rig, pose and motion tests.
 
-## Limits and tools
+## Review device and modeling tools
 
-The current environment confirmed a headless Blender WebAssembly runtime, but not an interactive native Blender Sculpt UI. The previous Python-primitive approach is closed. A candidate browser route is Puter's experimental full Blender WebAssembly/WebGPU app: <https://developer.puter.com/labs/blender-web/> with source at <https://github.com/HeyPuter/blender-wasm>. It offers a real Blender-style UI but needs WebGPU; the inspected live page reported no WebGPU adapter in this environment, and it has not been validated on the user's phone. Treat it as an experiment, not a guaranteed solution.
+The user reviews the work on an **iPhone**. Keep review artifacts as phone-friendly PNGs; do not make the user install Blender or operate a desktop UI just to approve a model. The `.blend` remains a source deliverable for later opening on a computer, not a blocker to visual feedback.
 
-A community Android port exists at <https://github.com/dshawshank/APP-android_arm64/releases> (latest visible release v0.0.5, August 2025). It is unofficial and old/experimental; do not sideload it or place project files there before checking device compatibility, security provenance, input support, and file-save behavior. It is not a professional pipeline by itself.
+The current sandbox has a headless Blender WebAssembly runtime but no interactive Sculpt UI. The old primitive/blockout workflow is closed. We can still run real Blender Python/Cycles from this environment, but future geometry must be custom and reference-measured, not generated from generic primitive assemblies. Every presented pass must be a real Blender scene/render with the matching source views; internal rough studies are not acceptance deliverables and cannot be called professional without user review.
 
-No paid cloud service is required or presumed. The actual sculpting/modeling route must be proven before any new model is promised.
+A candidate browser route is Puter's experimental full Blender WebAssembly/WebGPU app: <https://developer.puter.com/labs/blender-web/> with source at <https://github.com/HeyPuter/blender-wasm>. WebKit documents WebGPU support in Safari on iOS 26: <https://webkit.org/blog/17333/webkit-features-in-safari-26-0/>. This makes an iPhone test plausible, but the app's interface, memory needs, touch controls and `.blend` save/load have not been validated on the user's device. A web inspection from this sandbox reported no WebGPU adapter; that is not a test of the user's iPhone. Treat the route as optional, not required for the user to review progress.
+
+No paid cloud service is required or presumed. Continue with local Blender WASM for controlled scene generation and PNG review while clearly disclosing that it is not interactive manual sculpting.

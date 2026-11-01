@@ -1,6 +1,6 @@
 # Дорожная карта Family Studio
 
-Единый краткий трекер текущей работы. Здесь отмечаются **статус, зависимости, критерий завершения и следующий шаг**; детали модели остаются в персонажных brief, стратегия производства — в [`production-plan.md`](production-plan.md), а решения по локальным reference assets и legacy 3D prototype — в [`reference-assets-review.md`](reference-assets-review.md).
+Единый краткий трекер текущей работы. Здесь отмечаются **статус, зависимости, критерий завершения и следующий шаг**; детали персонажа — в brief и [`dad-reference-audit.md`](dad-reference-audit.md), стратегия производства — в [`production-plan.md`](production-plan.md), а решения по локальным reference assets — в [`reference-assets-review.md`](reference-assets-review.md).
 
 Правило статуса: задача считается выполненной только при наличии артефакта/проверки и, когда нужно, явного одобрения пользователя. План или неподтверждённый рендер не равен готовой модели.
 
@@ -36,10 +36,10 @@
 
 ## Ближайшие действия
 
-1. Сохранить новую коррекцию пользователя как текущую: ни R3 blockout, ни R4 procedural mesh не подходят и не являются стартовой геометрией.
-2. Выполнить reference audit: выровнять master images в единый scale, нанести landmarks, перечислить все видимые формы/мелкие детали, отметить несогласованности между видами и то, что не показано.
-3. Проверить реальный локальный путь к ручному sculpt/modeling в интерактивном Blender. Нынешний WASM harness пригоден для технического запуска/рендера, но не предоставляет подтверждённый ручной sculpt workflow; не выдавать Python primitives/AI mesh prompt за замену.
-4. Только после подготовленного production workflow начать custom detailed head study по эталонам с читаемыми волосами/бородой/глазами, сходством в front/¾/profile и крупными проверками; пользователю показывать осмысленные детализированные итерации, не принимать rough blockout за прогресс модели.
+1. Сохранить новую коррекцию пользователя как текущую: ни R3 blockout, ни R4 procedural mesh не подходят и не являются стартовой геометрией. ✅
+2. Подготовить visual reference board, детальный checklist и воспроизводимые silhouette samples из прозрачных master crops; зафиксировать SHA-256 исходников и ограничения измерений. ✅ — см. [`dad-reference-audit.md`](dad-reference-audit.md).
+3. Работать с нашей стороны через настоящий Blender WASM Python/Cycles: использовать измеренные силуэты/landmarks для custom continuous surfaces; не возвращаться к generic primitive assembly. Это не ручной sculpt, качество остаётся гипотезой до render/сверки.
+4. Создать custom detailed head iteration, достаточную для оценки лица/глаз/бороды/волос; показать PNG side-by-side с front/¾/profile и close-up. Пользователь смотрит на iPhone; `.blend` приложить как исходник, но не требовать desktop для review. Rough blockout не выдавать как accepted base или meaningful likeness result.
 5. После likeness approval перенести точный силуэт/объём на тело и одежду, затем материалы, retopology/UV, rig и animation tests. Каждый visual gate — реальные Blender-кадры side-by-side и явный approval.
 
 Оба отвергнутых mesh не дорабатывать и не использовать как старт. Следующий результат должен следовать утверждённым reference masters, а не форме старого blockout.

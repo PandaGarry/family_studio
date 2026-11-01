@@ -54,16 +54,15 @@ R3 раньше получил 9/10 как пропорциональная оп
 
 Runtime факт: Chromium isolation подтверждена; Blender 5.2 WASM прочитал `.blend`, исполнил Python, выполнил Cycles и сохранил файлы. Это говорит только о технической работоспособности. Пользователь оценил визуальный результат на **1/10** из-за колоссального расхождения с исходным образом. Причина — неправильный метод: простые параметрические shells/детали собраны напрямую по догадке, без точного side-by-side match и проверки головы до полной фигуры. Ни оболочки, ни script, ни renders не использовать как стартовую геометрию/визуальную цель.
 
-Текущий процесс: не продолжать ни с R3, ни с R4 геометрии. Сначала reference audit и проверка реального интерактивного Blender sculpt/modeling path; затем custom model с точным side-by-side likeness/detail review. «Blender выполнил script» и «Cycles отрендерил PNG» — только техническая проверка, не доказательство качества персонажа.
+Текущий процесс: не продолжать ни с R3, ни с R4 geometry. На нашей стороне проводить reference audit, извлекать силуэты/landmarks и строить custom surfaces через Blender WASM Python; каждый реальный Cycles PNG сверять side-by-side с master. Пользователь смотрит PNG на iPhone. Headless script/render — evidence выполнения и материал для художественной оценки, но не автоматическое доказательство likeness или профессионального качества.
 
-## Найденные интерактивные кандидаты (пока не прошли проверку)
+## Найденный интерактивный кандидат
 
-Поиск 2026-11-01 выявил два возможных локальных пути, но ни один ещё не подтверждён как рабочее решение для этой задачи:
+- [Puter Blender Web](https://developer.puter.com/labs/blender-web/) заявляет настоящий Blender UI в браузере через WebAssembly/WebGPU; исходный проект — [HeyPuter/blender-wasm](https://github.com/HeyPuter/blender-wasm). В текущем web-inspection среда сообщила `No WebGPU adapter is available` и предлагает медленный software fallback. Это тест нашей стороны, не iPhone.
+- [WebKit подтверждает WebGPU в Safari 26 на iOS 26](https://webkit.org/blog/17333/webkit-features-in-safari-26-0/), поэтому iPhone route возможен, если устройство/браузер поддерживают нужные функции. Но touch-control, памяти, UI, открытие/сохранение `.blend` и весь sculpt workflow в Puter app на пользовательском iPhone мы не проверяли.
+- Upstream demo — отдельная экспериментальная сборка, не маленькая зависимость; в репозитории указаны `make all`, `make blender-web`, `cd demo && pnpm dev`. Ничего не внедряем в рабочий pipeline, пока путь не проверен. Пользователю не требуется устанавливать приложение или работать в Blender ради каждого review.
 
-- [Puter Blender Web](https://developer.puter.com/labs/blender-web/) заявляет настоящий Blender UI в браузере через WebAssembly/WebGPU; исходный проект — [HeyPuter/blender-wasm](https://github.com/HeyPuter/blender-wasm). В текущем web-inspection он сообщил `No WebGPU adapter is available` и предлагает только очень медленный software fallback. В upstream repo есть сборка полной browser demo (`make all`, `make blender-web`, `cd demo && pnpm dev`), но это отдельная крупная экспериментальная сборка с GPU/UI зависимостями, а не маленькая замена нынешнему runtime. Mobile/phone sculpting и сохранение пользовательского `.blend` не проверены.
-- Для Android найден community port [APP-android_arm64](https://github.com/dshawshank/APP-android_arm64/releases), видимый latest release — v0.0.5 от 2025-08-07; обсуждение upstream говорит о базе Blender 3.6.22 и оставшихся проблемах touch/stylus/hardware. Это неофициальный APK для sideload, старый и экспериментальный. Не устанавливать и не переносить туда рабочие данные без проверки устройства, provenance, permissions и file I/O.
-
-**Вывод:** browser Blender — возможный эксперимент, а не подтверждённая профессиональная среда для папиного character work. Current status remains: native interactive sculpting is not available in this sandbox; do not promise production modeling until an actual usable workflow is tested.
+**Вывод:** headless Blender WASM пригоден для agent-side custom geometry/scripts и real render iterations; интерактивная browser UI — только дополнительная возможность, не обязательное условие для PNG review. Ни запуск скрипта, ни красивый свет не подтверждают качество без визуальной приёмки.
 
 ## Лицензия
 
