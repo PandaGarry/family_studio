@@ -4,34 +4,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark" />
-    <title>Family Studio — Blender runtime test</title>
+    <title>Family Studio — Dad model status</title>
   </head>
   <body>
     <main class="shell">
       <header>
         <p class="eyebrow">FAMILY STUDIO / CHARACTER PIPELINE</p>
-        <h1>Папа · Blender 3D blockout</h1>
-        <p class="lede">Проверка настоящего Blender 5.2 LTS, собранного в WebAssembly. По кнопке сцена строится из Blender Python API, сохраняется в .blend и рендерится Cycles.</p>
+        <h1>Папа · подготовка профессиональной 3D-итерации</h1>
+        <p class="lede">Задача — не получить ещё один процедурный blockout, а точно перенести утверждённый 2D/2.5D дизайн в объёмную модель, сохранив все видимые особенности и проверив сходство во всех ракурсах.</p>
       </header>
-      <section class="notice">
-        <strong>R3 · working base accepted 9/10</strong>
-        <span>Проверенный серый blockout — принятая основа пропорций, не production-модель, не риг и не анимация. Следующая визуальная задача — reference-driven моделирование головы с approval до полной детализации.</span>
+      <section class="notice" role="status">
+        <strong>Нет одобренной 3D-базы</strong>
+        <span>R3 blockout, ранее принятый как рабочая основа, теперь также отклонён как неподходящий старт. Процедурный R4 v1 отклонён ранее. Оба набора сохранены только в архиве; эта страница больше не запускает и не пересобирает их.</span>
       </section>
-      <section class="actions">
-        <button id="build" type="button">Запустить Blender и собрать blockout</button>
-        <span id="status" role="status">Ожидание запуска…</span>
+      <section class="workflow">
+        <h2>Следующий профессиональный этап</h2>
+        <ol>
+          <li>Разобрать master references: единый масштаб ракурсов, landmarks, силуэты, детали лица/волос/бороды/одежды и список того, чего изображения не показывают.</li>
+          <li>Собрать новую авторскую 3D-форму в полноценном Blender sculpt/modeling workflow — без использования отвергнутой геометрии как базы.</li>
+          <li>Проверить её side-by-side с front / ¾ / profile и крупным face crop; отдельно оценить лицо, объём одежды, свисающие рукава, посадку брюк, материалы и свет.</li>
+          <li>Не переходить к production topology/UV, rig и animation до визуального одобрения дизайна.</li>
+        </ol>
       </section>
-      <section class="progress-wrap" aria-label="Blender startup progress">
-        <div id="progress" class="progress"></div>
+      <section class="notice secondary-notice">
+        <strong>Технический статус</strong>
+        <span>Blender WebAssembly и Cycles ранее были технически проверены. Это не подтверждает качество модели. Интерактивный native Blender sculpting в текущей среде не подтверждён, поэтому Python-примитивы не будут выдавать за замену ручного моделирования.</span>
       </section>
-      <section id="renders" class="renders" aria-live="polite"></section>
-      <details>
-        <summary>Журнал запуска / диагностика</summary>
-        <pre id="log"></pre>
-      </details>
       <footer>
-        <span>Local-first • без облачного рендер-сервиса</span>
-        <span>WASM engine: GPL-3.0-or-later • Blender 5.2.0 LTS</span>
+        <span>Local-first • без обязательного облачного генератора</span>
+        <span>Blender 5.2.0 WASM • technical harness paused pending approved workflow</span>
       </footer>
     </main>
     <script type="module" src="/src/main.js"></script>

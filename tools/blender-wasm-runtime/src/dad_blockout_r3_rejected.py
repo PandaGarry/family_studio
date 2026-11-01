@@ -4,8 +4,9 @@ from mathutils import Matrix, Vector
 
 PROJECT_ROOT = r"__FAMILY_STUDIO_PROJECT_ROOT__"
 
-# R3 deliverable: a deliberately neutral, unapproved 3D silhouette blockout.
-# This is authored and executed in Blender, not in the legacy NumPy renderer.
+# ARCHIVED / REJECTED: historical R3 primitive blockout.
+# The user later clarified that this blockout is not a suitable model/base.
+# Do not use this script as an active modeling workflow or regenerate it as a deliverable.
 for obj in list(bpy.data.objects):
     bpy.data.objects.remove(obj, do_unlink=True)
 for collection in list(bpy.data.collections):
@@ -19,8 +20,8 @@ for material in list(bpy.data.materials):
     bpy.data.materials.remove(material)
 
 scene = bpy.context.scene
-scene.name = "Dad — R3 gray blockout"
-scene["family_studio_stage"] = "R3 blockout — likeness pending approval"
+scene.name = "Dad — R3 rejected blockout archive"
+scene["family_studio_stage"] = "REJECTED: user says blockout is not a suitable model/base"
 scene["family_studio_costume_override"] = "light crewneck, no hood"
 scene.render.engine = "BLENDER_EEVEE"
 scene.render.resolution_x = 360
@@ -29,7 +30,7 @@ scene.render.resolution_percentage = 100
 scene.render.image_settings.file_format = "PNG"
 scene.render.film_transparent = False
 scene.render.resolution_percentage = 100
-scene.render.filepath = "//renders/dad-blockout/"
+scene.render.filepath = "//renders/dad-blockout-r3-rejected/"
 scene.view_settings.view_transform = "AgX"
 scene.world = scene.world or bpy.data.worlds.new("World")
 scene.world.use_nodes = True
@@ -37,7 +38,7 @@ scene.world.node_tree.nodes["Background"].inputs["Color"].default_value = (0.38,
 scene.world.node_tree.nodes["Background"].inputs["Strength"].default_value = 0.45
 
 # Organize the native Blender scene for later rigging and approved refinements.
-root = bpy.data.collections.new("DAD — R3 BLOCKOUT")
+root = bpy.data.collections.new("DAD — R3 BLOCKOUT — REJECTED")
 scene.collection.children.link(root)
 refs = bpy.data.collections.new("REFERENCE IMAGES — viewport only")
 scene.collection.children.link(refs)
@@ -193,8 +194,8 @@ for obj in character_meshes:
 bpy.context.view_layer.objects.active = bpy.data.objects.get("Crewneck torso")
 bpy.ops.object.join()
 model = bpy.context.object
-model.name = "Dad — R3 gray blockout"
-model.data.name = "Dad blockout mesh shells"
+model.name = "Dad — R3 rejected gray blockout"
+model.data.name = "Rejected R3 blockout mesh shells"
 model["topology_note"] = "Single mesh object; disconnected primitive shells; not production topology or rig-ready"
 
 # Neutral studio ground.
@@ -276,4 +277,4 @@ for image in list(bpy.data.images):
 
 scene.frame_set(1)
 bpy.context.view_layer.update()
-print("FAMILY_STUDIO_BLOCKOUT_READY: Dad gray 3D blockout built with Blender Python; crewneck/no hood; 3 cameras; Cycles preview ready.")
+print("ARCHIVE_ONLY: rejected historical R3 blockout regenerated for audit; not an approved model or base.")

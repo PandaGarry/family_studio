@@ -12,11 +12,11 @@ const references = path.join(repoRoot, 'assets/references/character-masters/char
 const pendingDocuments = new Map();
 const documentChunks = new Map();
 
-const published = {
-  'dad-blockout.blend': path.join(repoRoot, 'assets/models/dad/dad-blockout.blend'),
-  'dad-blockout-front.png': path.join(repoRoot, 'assets/renders/dad-blockout/front.png'),
-  'dad-blockout-three-quarter.png': path.join(repoRoot, 'assets/renders/dad-blockout/three-quarter.png'),
-  'dad-blockout-side.png': path.join(repoRoot, 'assets/renders/dad-blockout/side.png'),
+const archivedArtifacts = {
+  'dad-blockout-r3-rejected.blend': path.join(repoRoot, 'assets/models/dad/rejected/dad-blockout-r3-rejected.blend'),
+  'dad-blockout-r3-rejected-front.png': path.join(repoRoot, 'assets/renders/dad-blockout-r3-rejected/front.png'),
+  'dad-blockout-r3-rejected-three-quarter.png': path.join(repoRoot, 'assets/renders/dad-blockout-r3-rejected/three-quarter.png'),
+  'dad-blockout-r3-rejected-side.png': path.join(repoRoot, 'assets/renders/dad-blockout-r3-rejected/side.png'),
 };
 
 function json(res, status, value) {
@@ -213,29 +213,16 @@ async function handle(req, res, next) {
     }
 
     if (pathname.startsWith('/api/artifacts/') && req.method === 'POST') {
-      const name = pathname.slice('/api/artifacts/'.length);
-      const destination = published[name];
-      if (!destination) return json(res, 404, { error: 'Artifact name is not in the allowlist' });
-      const bytes = await bodyBytes(req);
-      await mkdir(path.dirname(destination), { recursive: true });
-      await writeFile(destination, bytes);
-      return json(res, 201, { path: path.relative(repoRoot, destination), bytes: bytes.length });
+      return json(res, 410, { error: 'Artifact publishing is disabled while no Dad model is approved' });
     }
 
     if (pathname === '/api/publish-document' && req.method === 'POST') {
-      const name = url.searchParams.get('name');
-      if (name !== 'dad-blockout.blend') return json(res, 404, { error: 'Document name is not in the allowlist' });
-      const source = path.join(workspace, 'models/dad-blockout.blend');
-      const destination = published[name];
-      const bytes = await readFile(source);
-      await mkdir(path.dirname(destination), { recursive: true });
-      await writeFile(destination, bytes);
-      return json(res, 201, { path: path.relative(repoRoot, destination), bytes: bytes.length });
+      return json(res, 410, { error: 'Publishing the rejected blockout is disabled' });
     }
 
     if (pathname.startsWith('/api/artifacts/') && req.method === 'GET') {
       const name = pathname.slice('/api/artifacts/'.length);
-      const destination = published[name];
+      const destination = archivedArtifacts[name];
       if (!destination) return json(res, 404, { error: 'Artifact name is not in the allowlist' });
       const bytes = await readFile(destination);
       res.statusCode = 200;

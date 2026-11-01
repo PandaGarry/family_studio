@@ -1,6 +1,6 @@
 # Браузерный Blender runtime: проверка среды
 
-Статус: **browser smoke test пройден 2026-11-01.** Blender 5.2.0 LTS WebAssembly реально запущен в Chromium; Blender Python исполнил сцену, native Cycles сохранил три PNG, `.blend` сохранён и затем снова открыт Blender. Пользователь оценил blockout на 9/10 и одобрил его как базу для следующей фазы, но это не approval полноценной hero model.
+Статус: **технический browser smoke test пройден 2026-11-01; активный harness теперь намеренно остановлен.** Blender 5.2.0 LTS WebAssembly запускался в Chromium, Blender Python исполнил сцену, Cycles сохранил PNG, `.blend` был сохранён и переоткрыт. R3 blockout ранее получил 9/10 как proportion base, но пользователь позднее отверг его как неподходящий blockout/base; procedural R4 v1 получил 1/10. Оба mesh — только rejected archive, ни один не принят.
 
 ## Кандидат и локальная установка
 
@@ -14,7 +14,7 @@ npm install
 npm run dev
 ```
 
-Страница автоматически начинает тест только если браузер сообщает `crossOriginIsolated === true` и поддерживает `SharedArrayBuffer`. Dev server отправляет COOP `same-origin` и COEP `credentialless`, обслуживает runtime-файлы по same-origin endpoints и Brotli-артефакты с `Content-Encoding: br`. Платный cloud/render service не используется. Для этой Emscripten-сборки обязательны cross-origin isolation и рабочий браузерный WebAssembly worker.
+Текущая стартовая страница — статусная заглушка: автоматически Blender не запускается и rejected blockout не пересобирается. Исторический runtime setup использовал `crossOriginIsolated === true`, `SharedArrayBuffer`, COOP `same-origin`, COEP `credentialless` и same-origin Brotli assets. Запуск Blender WASM технически возможен, но браузерный harness не предоставляет подтверждённый интерактивный sculpting workflow. Платный cloud/render service не используется.
 
 ## Что уже проверено в этой среде
 
@@ -32,17 +32,17 @@ npm run dev
 
 1. Chromium 153 сообщил `crossOriginIsolated: true`; `SharedArrayBuffer` доступен, Vite COOP/COEP headers сохраняются и на маршрутах WASM-worker.
 2. `BlenderRuntime.start()` запустил Blender 5.2.0 LTS; startup banner перечислил нативные `CYCLES`, `BLENDER_EEVEE` и `BLENDER_WORKBENCH`.
-3. `src/dad_blockout.py` исполнился через Blender Python API без traceback. Сцена сохранилась как один Blender mesh object из disconnected primitive shells, с viewport-only references, камерами front / three-quarter / profile и crewneck/no hood.
+3. Archived `src/dad_blockout_r3_rejected.py` исполнился через Blender Python API без traceback. Сцена сохранилась как один Blender mesh object из disconnected primitive shells, с viewport-only references, камерами front / three-quarter / profile и crewneck/no hood. Скрипт сохранён только как история и больше не подключён к active page.
 4. `nativePreview()` подтвердил `renderer: CYCLES`, 360×640 и 32 samples; на тестовом Chromium один проход занял 9.65 s / 11.11 s / 6.41 s для трёх камер. Denoising upstream preview API отключает, так что это зернистые технические изображения.
 5. Blender bridge сохранил сжатый `.blend` через chunk/hash round-trip. Следующий браузерный запуск Blender прочитал этот файл обратно; runtime затем пересохранил обновлённую сцену.
 
 ## Полученные файлы
 
-- [`assets/models/dad/dad-blockout.blend`](../../assets/models/dad/dad-blockout.blend) — реальный Blender-файл, около 2.56 MB; загружался повторным Blender 5.2 runtime.
-- [`assets/renders/dad-blockout/front.png`](../../assets/renders/dad-blockout/front.png), [`three-quarter.png`](../../assets/renders/dad-blockout/three-quarter.png), [`side.png`](../../assets/renders/dad-blockout/side.png) — реальные native Cycles PNG, по 360×640.
-- Точная генерация описана в [`tools/blender-wasm-runtime/src/dad_blockout.py`](../../tools/blender-wasm-runtime/src/dad_blockout.py), запуск/сохранение — в [`src/main.js`](../../tools/blender-wasm-runtime/src/main.js).
+- [`assets/models/dad/rejected/dad-blockout-r3-rejected.blend`](../../assets/models/dad/rejected/dad-blockout-r3-rejected.blend) — исторический Blender-файл, ранее загружавшийся повторным Blender 5.2 runtime.
+- [`assets/renders/dad-blockout-r3-rejected/front.png`](../../assets/renders/dad-blockout-r3-rejected/front.png), [`three-quarter.png`](../../assets/renders/dad-blockout-r3-rejected/three-quarter.png), [`side.png`](../../assets/renders/dad-blockout-r3-rejected/side.png) — реальные native Cycles technical renders, не evidence качества модели.
+- Скрипт перемещён в [`tools/blender-wasm-runtime/src/dad_blockout_r3_rejected.py`](../../tools/blender-wasm-runtime/src/dad_blockout_r3_rejected.py); active page переписана как статическая статусная страница, без импорта этого скрипта.
 
-Эти файлы фиксируют R3 blockout, который пользователь оценил на 9/10 и принял как рабочую основу. Но геометрия всё ещё состоит из primitive shells внутри одного mesh object: нет clean production topology, UV, weights, body/facial rig или анимации. Этот артефакт не является hero model.
+R3 раньше получил 9/10 как пропорциональная опора, но пользователь позднее отверг blockout как подходящую базу. Он состоит из primitive shells, без production topology/UV/rig/animation; теперь его статус — rejected archive, не hero model и не стартовая геометрия.
 
 ## R4 procedural study v1 — технически отрендерен, визуально отвергнут
 
@@ -50,11 +50,11 @@ npm run dev
 
 - [`assets/models/dad/rejected/dad-procedural-v1.blend`](../../assets/models/dad/rejected/dad-procedural-v1.blend) — 2,443,966 bytes; SHA-256 `5e8d93c30b271b81fbd4cca6a7d8a945f4251fc03298576ec8299a9c2c1ec9e7`.
 - Его five-view native Cycles renders перемещены в [`assets/renders/dad-procedural-v1-rejected/`](../../assets/renders/dad-procedural-v1-rejected/) (four full-body angles at 512×896/64 samples; face close-up at 512×512/80 samples).
-- Сценарий сохранён как [`tools/blender-wasm-runtime/src/dad_procedural_v1_rejected.py`](../../tools/blender-wasm-runtime/src/dad_procedural_v1_rejected.py). Browser harness снова направлен на R3 blockout, а не на этот отвергнутый output.
+- Сценарий сохранён как [`tools/blender-wasm-runtime/src/dad_procedural_v1_rejected.py`](../../tools/blender-wasm-runtime/src/dad_procedural_v1_rejected.py). Harness не направлен ни на R3, ни на R4: active page остановлена.
 
 Runtime факт: Chromium isolation подтверждена; Blender 5.2 WASM прочитал `.blend`, исполнил Python, выполнил Cycles и сохранил файлы. Это говорит только о технической работоспособности. Пользователь оценил визуальный результат на **1/10** из-за колоссального расхождения с исходным образом. Причина — неправильный метод: простые параметрические shells/детали собраны напрямую по догадке, без точного side-by-side match и проверки головы до полной фигуры. Ни оболочки, ни script, ни renders не использовать как стартовую геометрию/визуальную цель.
 
-Исправленный R4 process: продолжать от принятого R3 proportion base, выровнять reference landmarks, затем сделать отдельное sculpt/modeling исследование головы в нескольких ракурсах и получить likeness approval до волос, одежды и full body. «Blender выполнил script» не является доказательством качества персонажа.
+Текущий процесс: не продолжать ни с R3, ни с R4 геометрии. Сначала reference audit и проверка реального интерактивного Blender sculpt/modeling path; затем custom model с точным side-by-side likeness/detail review. «Blender выполнил script» и «Cycles отрендерил PNG» — только техническая проверка, не доказательство качества персонажа.
 
 ## Лицензия
 
