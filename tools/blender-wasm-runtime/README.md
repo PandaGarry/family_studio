@@ -2,15 +2,23 @@
 
 This local harness runs the pinned `@volter/blender-engine@0.1.148` build of Blender 5.2.0 LTS in browser WebAssembly, creates custom exploratory meshes through Blender Python, renders native Cycles views and saves editable `.blend` files. Scripted mesh authoring is not manual sculpting.
 
-## Latest: V2 — still not approved
+## Latest study: V6 — still not approved
 
-V2 attempted the feedback-driven changes: broader skull/cheeks, smaller and more seated eyes, a stronger nose profile, a beard surface fitted to face-section estimates, and broad swept hair ribbons. Real Cycles renders show that the beard still reads as a hard mask, the quiff as spikes, and the profile likeness remains weak. This pass **failed**; it is not a usable production base.
+V6 is a separate study from the official Blender Human Base Meshes v1.4.1 `GEO-head_stylized` source. The cap and beard are geometry, not texture-only, but visual review still finds the hair too smooth/helmet-like and the beard too mask-like for the Dad turnaround. It is a diagnostic study, not a production base.
 
-- Blender scene: [`assets/models/dad/studies/dad-head-study-v2.blend`](../../assets/models/dad/studies/dad-head-study-v2.blend)
-- iPhone-friendly review board: [`assets/renders/dad-head-study-v2/review-board.png`](../../assets/renders/dad-head-study-v2/review-board.png)
-- Individual front / three-quarter / profile / close-up renders: [`assets/renders/dad-head-study-v2/`](../../assets/renders/dad-head-study-v2/)
-- Source script: [`src/dad_head_study_v2.py`](src/dad_head_study_v2.py)
-- [V2 visual review record](../../docs/series/dad-head-study-v2-review.md)
+- [V6 unapproved editable Blender scene](../../assets/models/dad/studies/dad-head-study-v6-unapproved.blend)
+- [V6 visual review and acceptance notes](../../assets/renders/dad-head-study-v6/REVIEW.md)
+- [V6 front / three-quarter / profile / close-up renders](../../assets/renders/dad-head-study-v6/)
+- [V6 scripted geometry builder](src/dad_head_study_v6.py)
+
+## Shared studio render rig
+
+[`src/studio_render_pipeline.py`](src/studio_render_pipeline.py) provides `setup_studio_review_rig(...)`: it derives world-space bounds from subject geometry, creates a consistent Cycles/AgX lighting setup, and names predictable orthographic front, three-quarter, profile, back and close-up cameras. Pass the character's renderable objects and a short prefix; resolution, samples, frame margin and studio colors are configurable. V6's browser/WASM harness executes this shared module with its builder and successfully rendered the four principal review views.
+
+This is a reusable **starting point**, not yet a validated universal production renderer: it has been tested on a head/bust study, not yet across the project's full-body characters or different material/lighting styles. Future characters should use the same camera/light baseline, then get reference-specific framing and material checks before approval.
+
+- Shared rig: [`src/studio_render_pipeline.py`](src/studio_render_pipeline.py)
+- V6 WASM render harness: [`_v6_render.html`](./_v6_render.html)
 
 ## Archived: V1 — failed first pass
 
