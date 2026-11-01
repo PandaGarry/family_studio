@@ -23,4 +23,4 @@
 - Сохранять исходные reference masters и JSON неизменными; пользовательские overrides записывать отдельно.
 - Геометрию строить вручную в Blender из согласованных references, не вырезать 3D-модель из зелёного turnaround.
 - Внешние ассеты отдельно вносить в [реестр ассетов и лицензий](asset-ledger.md).
-- Подробный текущий runtime proof и полученный Dad blockout описаны в [проверке Blender WASM](blender-wasm-runtime.md); технический proof не означает visual approval.
+- Подробный runtime proof и полученный Dad blockout описаны в [проверке Blender WASM](blender-wasm-runtime.md); пользователь оценил blockout на 9/10 и разрешил использовать как основу, но это не visual sign-off финальной hero model.

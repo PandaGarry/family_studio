@@ -6,11 +6,11 @@
 
 ## Текущее состояние — 2026-11-01
 
-**Фаза:** подготовка первого Blender-персонажа — папы.
+**Фаза:** R4 — полноценная high-quality 3D-фигура папы; затем topology/lookdev, rig и motion proof.
 
-**Сейчас:** Blender 5.2 WASM/Python/Cycles/.blend подтверждены. Пользователь оценил Dad blockout на **9/10** и считает его достаточно хорошей основой для продолжения.
+**Сейчас:** Blender 5.2 WASM/Python/Cycles/.blend подтверждены. Пользователь оценил gray blockout на **9/10** и поручил довести папу до чёткой, качественной, профессионально подготовленной 3D-фигуры.
 
-**Граница одобрения:** это разрешение продолжать следующий этап, не sign-off финальной модели. Dad остаётся грубым mesh object из primitive shells, без clean topology, rig и анимации. Следующий gate — refine Dad без бесконечной полировки, затем быстро проверить family lineup и двигаться дальше. Детали runtime — в [`blender-wasm-runtime.md`](blender-wasm-runtime.md).
+**Граница одобрения:** 9/10 — approval R3 blockout как основы, не финального дизайна. Отдельный R4 hero-model v1 уже создан и отрендерен из Blender Cycles; это статическая draft-фигура без sign-off, production retopology, UV, weights, rig или animation. «Идеал» разбит на проверяемые ворота: likeness, геометрия/силуэт, materials, topology, rig/deformation, motion и рендер. Детали runtime — в [`blender-wasm-runtime.md`](blender-wasm-runtime.md).
 
 ## Этапы и контрольные ворота
 
@@ -20,19 +20,20 @@
 | R1 | ✅ Готово | Зафиксировать и проверить локальные character masters; изучить legacy 3D prototype | У папы/мамы/сына есть неизменённые reference-файлы и provenance; старый NumPy prototype помечен как справочник, а не Blender asset |
 | R2 | 🟡 В работе | Подготовить авторский brief первого героя — папы | Визуальные якоря, одежда и нерешённые детали записаны; пользователь подтвердил светлый crewneck без капюшона |
 | R3 | ✅ Blockout accepted as working base (9/10) | Зафиксировать первый серый 3D blockout папы и проверить runtime | Blender Python, native Cycles front/¾/profile и reopen `.blend` подтверждены; пользователь дал 9/10. Это одобрение основы для продолжения, не production-модели |
-| R4 | 🟡 В работе | Уточнить Dad identity, форму лица/волос/бороды, одежду и перейти к clean topology | Узнаваемый front/¾/profile и close-up после итерации; без бесконечного микрополиша |
-| R5 | ⏸ После R4 | Собрать body rig и facial rig | Проверены eye aim, blink с веками, brow/jaw controls, базовые visemes; устойчивые деформации тела/одежды |
-| R6 | ⏸ После R5 | Анимационный proof: idle, взгляд, поворот, жест, 2–3 шага | Непрерывное движение одного рига; стопы не скользят, лицо/кисти/одежда не ломаются; рендер фактически получен из Blender |
-| R7 | ⏸ После R6 approval | Добавить маму и сына как отдельные согласованные 3D-герои | У каждого собственные brief, blockout, rig и identity gate; общий lineup читается как одна семья |
-| R8 | ⏸ После R6 | Серия-пилот 30–45 секунд | Утверждены сценарий, storyboard/animatic, шоты, звук и повторяемый локальный экспорт |
+| R4 | 🟡 В работе · hero-model v1 создан | Построить выразительную полноценную фигуру папы: форма головы/лица, волосы, борода, анатомия, crewneck, джинсы и обувь | R4 v1 в `assets/models/dad/dad-hero-v1.blend`; 5 native Cycles views в `assets/renders/dad-hero-v1/`. Дальше — likeness/shape iteration; критерий закрытия: утверждённые front/¾/profile/back и close-up, без видимых дефектов формы |
+| R5 | ⏸ После identity/shape sign-off | Подготовить production asset: чистая организованная геометрия, UV, материалы, одежда и сценовая упаковка | Названные компоненты, подходящая топология для деформаций, чистые UV/material slots, без z-fighting/clipping в базовых позах; отдельный review board |
+| R6 | ⏸ После R5 | Собрать body rig и facial rig | Проверены eye aim, полноценный blink с веками, brows/jaw controls, базовые visemes; устойчивые деформации тела/одежды |
+| R7 | ⏸ После R6 | Анимационный proof: idle, взгляд, поворот, жест, 2–3 шага | Непрерывное движение одного рига; стопы не скользят, лицо/кисти/одежда не ломаются; Blender-рендер фактически получен и проверен |
+| R8 | ⏸ Family lineup checkpoint после R4; полноценная работа после R7 | Сверить рост/масштаб семьи и поочерёдно перенести маму и сына | Сначала простые blockouts для общего масштаба; затем у каждого свой brief, hero model, rig и identity gate |
+| R9 | ⏸ После R7 | Серия-пилот 30–45 секунд | Утверждены сценарий, storyboard/animatic, шоты, звук и повторяемый локальный экспорт |
 
 ## Ближайшие действия
 
-1. **Refine Dad as the pilot**: improve readable face/hair/beard and crewneck silhouette, keeping the accepted proportions as the base; compare front / ¾ / profile / close-up.
-2. До дорогой детализации сделать быстрый общий lineup/scale-check для Dad/Mom/Son, чтобы не зафиксировать одному герою пропорции, несовместимые с семьёй.
-3. Завершить Dad clean topology, body/facial rig и короткий motion proof; после проверки переиспользовать утверждённый подход для мамы и сына поочерёдно.
+1. Уточнить v1 по reference comparison: органичнее hairline/пряди и beard silhouette, улучшить лицо и сопряжение голова–шея–плечи; сверять face/front/side crops.
+2. Полировать full figure: сделать более естественные пропорции/складки одежды, кисти, форму джинсов/обуви; затем сделать общий lineup-scale check с простыми силуэтами мамы/сына.
+3. На каждом вороте получать реальные Blender-рендеры front / ¾ / profile / back / close-up; после identity sign-off перейти к clean topology/UV/materials, затем к body/facial rig и motion proof.
 
-Blockout получил разрешение на продолжение, но финальная модель/rig/animation ещё не готовы.
+Не объявлять «идеал» готовым по одному красивому ракурсу: проверять силуэт, likeness, техническую чистоту, деформации и движение отдельно.
 
 ## Решения, которые считаются зафиксированными
 

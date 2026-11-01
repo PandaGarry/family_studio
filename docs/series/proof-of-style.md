@@ -20,7 +20,7 @@
 
 ## Технический Blender smoke test (не proof-of-style)
 
-2026-11-01 подтверждён Blender 5.2.0 WebAssembly runtime в Chromium: Blender Python создал серый 3D blockout папы, Cycles отрендерил front/¾/profile, `.blend` сохранён и повторно открыт. Это проверка запуска и обмена файлами, **не** proof-of-style: primitive shells, качество лица/силуэта не утверждено, rig и движение отсутствуют. Подробности/артефакты — в [`blender-wasm-runtime.md`](blender-wasm-runtime.md).
+2026-11-01 подтверждён Blender 5.2.0 WebAssembly runtime в Chromium: Blender Python создал серый Dad blockout, Cycles отрендерил front/¾/profile, `.blend` сохранён и повторно открыт. Пользователь оценил blockout на 9/10 и принял как основу. После этого создан отдельный R4 hero-model v1: полная цветная статическая фигура с пятью native Cycles views и собственным `.blend`. Это progress asset для likeness/lookdev, **не** финальный proof-of-style: likeness ещё не sign-off, topology/UV/rig/animation не готовы. Подробности/артефакты — в [`blender-wasm-runtime.md`](blender-wasm-runtime.md).
 
 ## Legacy procedural 3D prototype
 
