@@ -56,6 +56,15 @@ Runtime факт: Chromium isolation подтверждена; Blender 5.2 WASM 
 
 Текущий процесс: не продолжать ни с R3, ни с R4 геометрии. Сначала reference audit и проверка реального интерактивного Blender sculpt/modeling path; затем custom model с точным side-by-side likeness/detail review. «Blender выполнил script» и «Cycles отрендерил PNG» — только техническая проверка, не доказательство качества персонажа.
 
+## Найденные интерактивные кандидаты (пока не прошли проверку)
+
+Поиск 2026-11-01 выявил два возможных локальных пути, но ни один ещё не подтверждён как рабочее решение для этой задачи:
+
+- [Puter Blender Web](https://developer.puter.com/labs/blender-web/) заявляет настоящий Blender UI в браузере через WebAssembly/WebGPU; исходный проект — [HeyPuter/blender-wasm](https://github.com/HeyPuter/blender-wasm). В текущем web-inspection он сообщил `No WebGPU adapter is available` и предлагает только очень медленный software fallback. В upstream repo есть сборка полной browser demo (`make all`, `make blender-web`, `cd demo && pnpm dev`), но это отдельная крупная экспериментальная сборка с GPU/UI зависимостями, а не маленькая замена нынешнему runtime. Mobile/phone sculpting и сохранение пользовательского `.blend` не проверены.
+- Для Android найден community port [APP-android_arm64](https://github.com/dshawshank/APP-android_arm64/releases), видимый latest release — v0.0.5 от 2025-08-07; обсуждение upstream говорит о базе Blender 3.6.22 и оставшихся проблемах touch/stylus/hardware. Это неофициальный APK для sideload, старый и экспериментальный. Не устанавливать и не переносить туда рабочие данные без проверки устройства, provenance, permissions и file I/O.
+
+**Вывод:** browser Blender — возможный эксперимент, а не подтверждённая профессиональная среда для папиного character work. Current status remains: native interactive sculpting is not available in this sandbox; do not promise production modeling until an actual usable workflow is tested.
+
 ## Лицензия
 
 Пакет и собранный runtime предоставляются на условиях GPL-3.0-or-later; сведения о Blender и исходные notices сохранены в [`tools/blender-wasm-runtime/THIRD_PARTY_NOTICES.md`](../../tools/blender-wasm-runtime/THIRD_PARTY_NOTICES.md) и каталоге `THIRD_PARTY_LICENSES/`. Версия/источник зафиксированы в `package.json`, `package-lock.json` и upstream `BUNDLE.json` пакета. Не убирать эти файлы при распространении runtime.

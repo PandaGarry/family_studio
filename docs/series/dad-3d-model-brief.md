@@ -4,6 +4,8 @@
 
 ## Источники
 
+Подготовлена производная [reference-audit board](../../assets/references/character-masters/characters/dad/reference-audit-board.png) и подробный [`dad-reference-audit.md`](dad-reference-audit.md); board только компонует неизменённые источники для просмотра и не является моделью.
+
 Основные неизменённые файлы:
 
 - `assets/references/character-masters/characters/dad/turnaround.png` — front / 3⁄4 / side на зелёном reference-фоне.
