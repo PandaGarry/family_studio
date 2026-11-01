@@ -1,8 +1,18 @@
 # Blender WebAssembly runtime — Dad head studies
 
-This local harness runs the pinned `@volter/blender-engine@0.1.148` build of Blender 5.2.0 LTS in browser WebAssembly, creates custom exploratory meshes through Blender Python, renders native Cycles views and saves editable `.blend` files. Scripted mesh authoring is not manual sculpting.
+This local harness runs the pinned `@volter/blender-engine@0.1.148` build of Blender 5.2.0 LTS in browser WebAssembly, creates exploratory characters through Blender Python, renders native Cycles views and saves editable `.blend` files. Scripted mesh authoring is not manual sculpting.
 
-## Latest study: V6 — still not approved
+## Current study: V8 — MPFB2 works, likeness not approved
+
+MPFB2 v2.0.18 was registered and exercised in Blender 5.2 WASM: it created the Human base mesh, accepted measured eye and cheek/jaw targets, assigned a layered skin material, saved a `.blend`, and rendered four views. Actual CC0 proxies from the HumanGenWeb/MakeHuman system-assets set were fitted for eyes, brows, hair, clothes and shoes. The short-hair candidates still have scalp/fit defects; no beard proxy was found; the best outfit proxy is a short-sleeve T-shirt rather than the requested crewneck sweater, and the shoe proxies expose toes. WASM compatibility is confirmed, but likeness and clothing are not approved; no Plan B was needed.
+
+- [V8 interim side-by-side review and license/access notes](../../assets/renders/dad-head-study-v8/REVIEW_V8.md)
+- [V8 reference-vs-MPFB2 face board](../../assets/renders/dad-head-study-v8/REVIEW_BOARD.png)
+- [V8 diagnostic renders](../../assets/renders/dad-head-study-v8/)
+- [Self-contained unapproved V8 MPFB2 scene](../../assets/models/dad/studies/dad-head-study-v8-mpfb-unapproved.blend) (11 MB, packed textures; diagnostic only)
+- Working WASM scene: `workspace/models/dad-head-study-v8-mpfb.blend`
+
+## Earlier study: V6 — still not approved
 
 V6 is a separate study from the official Blender Human Base Meshes v1.4.1 `GEO-head_stylized` source. The cap and beard are geometry, not texture-only, but visual review still finds the hair too smooth/helmet-like and the beard too mask-like for the Dad turnaround. It is a diagnostic study, not a production base.
 
@@ -42,7 +52,7 @@ The page loads V2's saved renders without starting Blender. Use the explicit but
 
 ## Constraints and limits
 
-- Approved Dad masters remain the source of truth; light crewneck/no hood is unchanged. This iteration is head-only.
+- Approved Dad masters remain the source of truth; light crewneck/no hood is unchanged. V8 now contains a diagnostic full-body proxy assembly, not an approved body, outfit, or likeness.
 - The 934 measured silhouette samples have **not** yet been applied numerically to V1 or V2. The available scene guides and custom profiles do not make these a verified likeness transfer.
 - Do not proceed to body, production topology, rig or animation from V1/V2. User review is the approval gate.
 - No paid cloud renderer is required. Browser cross-origin isolation is required for WebAssembly threads.
