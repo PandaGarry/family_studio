@@ -26,6 +26,12 @@ const candidateArtifacts = {
   'dad-head-study-v1-profile.png': path.join(repoRoot, 'assets/renders/dad-head-study-v1/profile.png'),
   'dad-head-study-v1-face-closeup.png': path.join(repoRoot, 'assets/renders/dad-head-study-v1/face-closeup.png'),
   'dad-head-study-v1-review-board.png': path.join(repoRoot, 'assets/renders/dad-head-study-v1/review-board.png'),
+  'dad-head-study-v2.blend': path.join(repoRoot, 'assets/models/dad/studies/dad-head-study-v2.blend'),
+  'dad-head-study-v2-front.png': path.join(repoRoot, 'assets/renders/dad-head-study-v2/front.png'),
+  'dad-head-study-v2-three-quarter.png': path.join(repoRoot, 'assets/renders/dad-head-study-v2/three-quarter.png'),
+  'dad-head-study-v2-profile.png': path.join(repoRoot, 'assets/renders/dad-head-study-v2/profile.png'),
+  'dad-head-study-v2-face-closeup.png': path.join(repoRoot, 'assets/renders/dad-head-study-v2/face-closeup.png'),
+  'dad-head-study-v2-review-board.png': path.join(repoRoot, 'assets/renders/dad-head-study-v2/review-board.png'),
 };
 
 function json(res, status, value) {
@@ -224,7 +230,7 @@ async function handle(req, res, next) {
     if (pathname.startsWith('/api/artifacts/') && req.method === 'POST') {
       const name = pathname.slice('/api/artifacts/'.length);
       const destination = candidateArtifacts[name];
-      if (!destination || !name.endsWith('.png')) return json(res, 410, { error: 'Only allowlisted head-study v1 PNG evidence can be published' });
+      if (!destination || !name.endsWith('.png')) return json(res, 410, { error: 'Only allowlisted head-study PNG evidence can be published' });
       const bytes = await bodyBytes(req, 32 * 1024 * 1024);
       await mkdir(path.dirname(destination), { recursive: true });
       await writeFile(destination, bytes);
@@ -233,8 +239,8 @@ async function handle(req, res, next) {
 
     if (pathname === '/api/publish-document' && req.method === 'POST') {
       const name = url.searchParams.get('name');
-      if (name !== 'dad-head-study-v1.blend') return json(res, 410, { error: 'Only the allowlisted unapproved head study can be published' });
-      const source = path.join(workspace, 'models/dad-head-study-v1.blend');
+      if (!['dad-head-study-v1.blend', 'dad-head-study-v2.blend'].includes(name)) return json(res, 410, { error: 'Only allowlisted unapproved head studies can be published' });
+      const source = path.join(workspace, 'models', name);
       const destination = candidateArtifacts[name];
       const bytes = await readFile(source);
       await mkdir(path.dirname(destination), { recursive: true });

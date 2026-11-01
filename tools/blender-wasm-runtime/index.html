@@ -4,18 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark" />
-    <title>Family Studio — Dad head study v1</title>
+    <title>Family Studio — Dad head study v2</title>
   </head>
   <body>
     <main class="shell">
       <header>
         <p class="eyebrow">FAMILY STUDIO / REFERENCE-DRIVEN HEAD STUDY</p>
-        <h1>Папа · новая итерация головы</h1>
-        <p class="lede">Проверяю новую независимую форму головы в Blender WASM. Утверждённые master-изображения вложены в сцену как ориентиры, но 934 силуэтных измерения ещё не перенесены в координаты этой геометрии. R3/R4 не используются.</p>
+        <h1>Папа · итерация головы V2</h1>
+        <p class="lede">V2 проверяет идеи из критики: шире череп и щёки, меньше глаза, выраженнее спинка носа, борода по поверхности лица и широкие пряди. Рендеры показали, что борода всё ещё читается маской, а причёска — шипами. Это честный неудачный исследовательский проход, не готовая база; 934 силуэтных измерения ещё не управляют геометрией. R3/R4 не используются.</p>
       </header>
       <section class="notice" role="status">
-        <strong>Кандидат на review · не одобрен</strong>
-        <span>Скрипт создаёт custom loft/sweep meshes и реальные Cycles-рендеры: front, ¾, profile и face close-up. Это Blender Python authoring, не ручной sculpt и не утверждение о likeness; оцениваем только после просмотра изображений.</span>
+        <strong>Черновик V2 · не одобрен</strong>
+        <span>Сцена V2 создана custom mesh-сценарием Blender Python и проверена реальными Cycles-рендерами с четырёх ракурсов. Это не ручной sculpt, не чистый production base mesh и не одобренное likeness.</span>
       </section>
       <section class="actions">
         <button id="build" type="button">Запустить Blender и получить рендеры</button>
@@ -25,16 +25,16 @@
         <div id="progress" class="progress"></div>
       </section>
       <section class="notice secondary-notice">
-        <strong>Итог первой проверки</strong>
-        <span>Блендер и Cycles отработали, но сам визуальный проход не прошёл gate сходства: волосы получились шипами, борода — цельной маской, а лицо не передаёт master. Ниже показан именно этот честный диагностический результат, не одобренная модель.</span>
+        <strong>Итог V2 · сходство не прошло</strong>
+        <span>Форма черепа шире, а глаза меньше, но волосы всё ещё шиповатые, борода выглядит пластиковой маской, профиль остаётся слабым. Геометрия — отдельные редактируемые поверхности, а не «80% готовая» чистая base mesh. Ни V1, ни V2 не одобрены.</span>
       </section>
       <section id="renders" class="renders" aria-live="polite">
-        <figure><img src="/api/artifacts/dad-head-study-v1-front.png" alt="Blender Cycles front render — unapproved study" /><figcaption>Front · unapproved study</figcaption><a href="/api/artifacts/dad-head-study-v1-front.png" download>PNG</a></figure>
-        <figure><img src="/api/artifacts/dad-head-study-v1-three-quarter.png" alt="Blender Cycles three-quarter render — unapproved study" /><figcaption>Three-quarter · unapproved study</figcaption><a href="/api/artifacts/dad-head-study-v1-three-quarter.png" download>PNG</a></figure>
-        <figure><img src="/api/artifacts/dad-head-study-v1-profile.png" alt="Blender Cycles profile render — unapproved study" /><figcaption>Profile · unapproved study</figcaption><a href="/api/artifacts/dad-head-study-v1-profile.png" download>PNG</a></figure>
-        <figure><img src="/api/artifacts/dad-head-study-v1-face-closeup.png" alt="Blender Cycles face close-up — unapproved study" /><figcaption>Face close-up · unapproved study</figcaption><a href="/api/artifacts/dad-head-study-v1-face-closeup.png" download>PNG</a></figure>
+        <figure><img src="/api/artifacts/dad-head-study-v2-front.png" alt="Blender Cycles front render — unapproved study" /><figcaption>Front · unapproved study</figcaption><a href="/api/artifacts/dad-head-study-v2-front.png" download>PNG</a></figure>
+        <figure><img src="/api/artifacts/dad-head-study-v2-three-quarter.png" alt="Blender Cycles three-quarter render — unapproved study" /><figcaption>Three-quarter · unapproved study</figcaption><a href="/api/artifacts/dad-head-study-v2-three-quarter.png" download>PNG</a></figure>
+        <figure><img src="/api/artifacts/dad-head-study-v2-profile.png" alt="Blender Cycles profile render — unapproved study" /><figcaption>Profile · unapproved study</figcaption><a href="/api/artifacts/dad-head-study-v2-profile.png" download>PNG</a></figure>
+        <figure><img src="/api/artifacts/dad-head-study-v2-face-closeup.png" alt="Blender Cycles face close-up — unapproved study" /><figcaption>Face close-up · unapproved study</figcaption><a href="/api/artifacts/dad-head-study-v2-face-closeup.png" download>PNG</a></figure>
       </section>
-      <p class="model-link">Мультиракурсный лист: <a href="/api/artifacts/dad-head-study-v1-review-board.png" download>dad-head-study-v1-review-board.png</a> · исходник сцены: <a href="/api/artifacts/dad-head-study-v1.blend" download>dad-head-study-v1.blend</a>. Оба материала предназначены только для review, не для production.</p>
+      <p class="model-link">Лист V2: <a href="/api/artifacts/dad-head-study-v2-review-board.png" download>dad-head-study-v2-review-board.png</a> · сцена V2: <a href="/api/artifacts/dad-head-study-v2.blend" download>dad-head-study-v2.blend</a> · архив V1: <a href="/api/artifacts/dad-head-study-v1-review-board.png" download>dad-head-study-v1-review-board.png</a>. Все материалы не одобрены и не предназначены для production.</p>
       <section class="workflow">
         <h2>Проверка перед любыми следующими этапами</h2>
         <ol>
