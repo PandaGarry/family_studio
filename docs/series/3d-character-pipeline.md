@@ -10,13 +10,13 @@
 
 ## Как используем имеющиеся изображения
 
-Более чистые исходные masters из `PandaGarry/docuflow` теперь сохранены в `assets/references/docuflow/characters/{dad,mom,son}/`: turnaround, face master, front/3⁄4/profile crops и исходные карточки героев. Происхождение и явное разрешение пользователя зафиксированы в [`docuflow-migration-review.md`](docuflow-migration-review.md) и [`asset-ledger.md`](asset-ledger.md). Старые скриншоты в `assets/references/raw/` сохраняются как вспомогательные; они не вытесняются и не переписываются.
+Локальные masters папы, мамы и сына сохранены в `assets/references/character-masters/characters/{dad,mom,son}/`: turnarounds, face masters, front/¾/profile crops и исходные карточки героев. Разрешение на использование, неизменность файлов и границы применения зафиксированы в [`reference-assets-review.md`](reference-assets-review.md), [`assets/references/character-masters/README.md`](../../assets/references/character-masters/README.md) и [`asset-ledger.md`](asset-ledger.md). Старые скриншоты в `assets/references/raw/` остаются вспомогательными; они не вытесняются и не переписываются.
 
 Зелёный фон на turnaround и любые прежние следы UI — свойства reference, не материалы персонажей. Не вырезать из них готовую модель, не использовать фон как текстуру/окружение. Изображения задают пропорции и ориентиры, но не содержат достоверную заднюю поверхность, топологию или деформируемый риг: геометрию нужно строить и согласовывать вручную.
 
 **Первый герой — папа**, согласно приоритету проекта: см. [`dad-3d-model-brief.md`](dad-3d-model-brief.md). Пользователь подтвердил светлый crewneck без капюшона; исходная карточка `character.json` остаётся нетронутой, а это решение зафиксировано отдельно. Бриф мальчика остаётся заготовкой следующего героя, не текущим стартовым заданием.
 
-Параметрические значения из старого `docuflow` и его Python/NumPy geometry/rig могут служить техническим справочником, но не считаются Blender-моделью. Подробная ревизия и точные границы переноса — в [`docuflow-migration-review.md`](docuflow-migration-review.md).
+Параметрические значения из legacy Python/NumPy prototype и его rig могут служить лишь техническим справочником, но не считаются Blender-моделью. Подробная ревизия и границы применения — в [`reference-assets-review.md`](reference-assets-review.md).
 
 ## Производственный порядок и quality gates
 

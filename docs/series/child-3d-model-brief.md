@@ -1,11 +1,11 @@
 # Следующий 3D-модельный brief: мальчик в кепке P
 
-Статус: рабочая спецификация v0.2 по скриншотам и новым masters из `docuflow`; **не утверждённый финальный дизайн и не готовая модель**. Мальчик — следующий герой после отца, не текущий первый proof-of-style. Для дальнейшей работы доступны более чистые источники: `assets/references/docuflow/characters/son/{turnaround.png,face.png,front.png,three_quarter.png,side.png,character.json}`. Сохранять их неизменёнными; детали происхождения — [`docuflow-migration-review.md`](docuflow-migration-review.md).
+Статус: рабочая спецификация v0.2 по скриншотам и локальным character masters; **не утверждённый финальный дизайн и не готовая модель**. Мальчик — следующий герой после отца, не текущий первый proof-of-style. Для дальнейшей работы доступны `assets/references/character-masters/characters/son/{turnaround.png,face.png,front.png,three_quarter.png,side.png,character.json}`. Сохранять их неизменёнными; детали использования — [`reference-assets-review.md`](reference-assets-review.md).
 
 ## Референсы
 
-- Основной будущий reference set: `assets/references/docuflow/characters/son/turnaround.png`, `face.png` и отдельные `front.png`, `three_quarter.png`, `side.png`; generated turnaround на зелёном фоне оставлен референс-листом, фон не относится к персонажу.
-- `assets/references/docuflow/characters/son/character.json` — исходная карточка пропорций и identity; проверить её значения визуально до фиксации модели.
+- Основной будущий reference set: `assets/references/character-masters/characters/son/turnaround.png`, `face.png` и отдельные `front.png`, `three_quarter.png`, `side.png`; generated turnaround на зелёном фоне оставлен референс-листом, фон не относится к персонажу.
+- `assets/references/character-masters/characters/son/character.json` — исходная карточка пропорций и identity; проверить её значения визуально до фиксации модели.
 - Вторичные материалы: `assets/references/modeling/boy-turnaround-panel.png`, `assets/references/raw/IMG_5976.png` (портрет), `assets/references/raw/IMG_5979.png` (pointing-поза).
 - Старые raw PNG — скриншоты; элементы телефона/видеоплеера и нижняя кнопка — не канон модели. Не сэмплировать их цвет и не использовать как texture.
 

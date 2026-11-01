@@ -1,16 +1,16 @@
 # Первый 3D-персонаж: папа
 
-Статус: рабочий визуальный brief v0.3 по мастерам из `docuflow`. Это **не готовая сетка и не Blender-render**. Папа выбран первым героем, потому что сохранение его сходства было главным узким местом прежней 2.5D-анимации. Пользователь подтвердил домашний верх: светлый crewneck без капюшона (2026-11-01); исходный JSON сохранён без изменений.
+Статус: рабочий визуальный brief v0.3 по локальным character masters. Это **не готовая сетка и не Blender-render**. Папа выбран первым героем, потому что сохранение его сходства было главным узким местом прежней 2.5D-анимации. Пользователь подтвердил домашний верх: светлый crewneck без капюшона (2026-11-01); исходный JSON сохранён без изменений.
 
 ## Источники
 
 Основные неизменённые файлы:
 
-- `assets/references/docuflow/characters/dad/turnaround.png` — front / 3⁄4 / side на зелёном reference-фоне.
-- `assets/references/docuflow/characters/dad/face.png` — крупный front portrait для формы лица и черт.
-- `assets/references/docuflow/characters/dad/{front,three_quarter,side}.png` — отдельные кропы видов.
-- `assets/references/docuflow/characters/dad/character.json` — исходные пропорции, палитра и ограничения identity.
-- Происхождение, версия и ограничения использования: [`assets/references/docuflow/README.md`](../../assets/references/docuflow/README.md).
+- `assets/references/character-masters/characters/dad/turnaround.png` — front / 3⁄4 / side на зелёном reference-фоне.
+- `assets/references/character-masters/characters/dad/face.png` — крупный front portrait для формы лица и черт.
+- `assets/references/character-masters/characters/dad/{front,three_quarter,side}.png` — отдельные кропы видов.
+- `assets/references/character-masters/characters/dad/character.json` — исходные пропорции, палитра и ограничения identity.
+- Происхождение, версия и ограничения использования: [`assets/references/character-masters/README.md`](../../assets/references/character-masters/README.md).
 
 Скриншоты из `assets/references/raw/` остаются вспомогательными. Не брать из зелёного фона цвет материала/окружения; не переносить UI или следы хромакея на модель.
 
@@ -43,5 +43,5 @@
 
 - Кроп или смену поз из 2D-библиотеки.
 - Чужую готовую модель с похожей одеждой.
-- Старый `body3d.py`/NumPy software-render из `docuflow`: там есть полезные пропорции и заметки по IK, но документация источника сама фиксирует недостаточную детализацию/качество.
+- Legacy `body3d.py`/NumPy software-render: отдельный технический эксперимент с полезными заметками по пропорциям/IK, но недостаточной детализацией/качеством; не Blender model и не style baseline.
 - Скриншот или ролик, если он не получен из одного проверенного Blender mesh/rig.

@@ -22,6 +22,6 @@
 
 2026-11-01 подтверждён Blender 5.2.0 WebAssembly runtime в Chromium: Blender Python создал серый 3D blockout папы, Cycles отрендерил front/¾/profile, `.blend` сохранён и повторно открыт. Это проверка запуска и обмена файлами, **не** proof-of-style: primitive shells, качество лица/силуэта не утверждено, rig и движение отсутствуют. Подробности/артефакты — в [`blender-wasm-runtime.md`](blender-wasm-runtime.md).
 
-## Связь с 3D-экспериментом из `docuflow`
+## Legacy procedural 3D prototype
 
-В исходном проекте найден более ранний программный mesh/rasterizer и 21-костный Python-риг. Это не Blender-файл: в источнике нет `.blend` или Godot project, а журнал `docuflow` отмечает недостаточное качество этого прототипа. Его движения/IK и параметрические числа можно проверять как технический справочник, но не считать одобренным proof-of-style для Family Studio. Подробности и переносимые исходные masters — в [`docuflow-migration-review.md`](docuflow-migration-review.md).
+В прежних технических материалах описан Python/NumPy mesh renderer и 21-костный rig. Это не Blender-файл и не утверждённый style baseline; его движения/IK и параметрические числа можно использовать только как технические идеи. Подробности и границы применения — в [`reference-assets-review.md`](reference-assets-review.md).

@@ -1,6 +1,6 @@
 # Family Studio
 
-Локальный production-проект для короткого семейного мультсериала с авторскими 3D-персонажами, управляемыми ригами и вертикальными выпусками 30–45 секунд. Исходная точка — пользовательские референсы; геометрия и риг создаются и утверждаются вручную.
+Локальный production-проект короткого семейного мультсериала с авторскими 3D-персонажами, управляемыми ригами и вертикальными выпусками 30–45 секунд. Персонажные референсы, сцены и производственные материалы ведутся внутри этого проекта; геометрия и риг создаются и утверждаются вручную.
 
 ## Рабочие документы
 
@@ -8,13 +8,13 @@
 - [Анализ творческих ориентиров](docs/series/influence-analysis.md) — принципы выбранных мультсериалов и собственное направление без копирования.
 - [Визуальная библия персонажей](docs/series/character-bible.md) — предварительный разбор образов, неутверждённый канон.
 - [3D-пайплайн персонажей и рига](docs/series/3d-character-pipeline.md) — моделирование, facial rig, анимация и проверки качества.
-- [Проверка Blender WebAssembly runtime](docs/series/blender-wasm-runtime.md) — подготовленный harness, ограничения текущего browser preview и честный статус smoke test.
-- [Ревизия и перенос из docuflow](docs/series/docuflow-migration-review.md) — что перенесено, что только технический справочник и почему старый NumPy-рендер не является Blender-proof.
-- [Бриф первой 3D-модели: папа](docs/series/dad-3d-model-brief.md) — визуальные якоря, вопросы канона и approval gates.
+- [Проверка Blender WebAssembly runtime](docs/series/blender-wasm-runtime.md) — проверенный harness, локальный запуск и ограничения browser runtime.
+- [Ревизия персонажных референсов и legacy 3D-прототипа](docs/series/reference-assets-review.md) — состав локальных reference assets и границы технических экспериментов.
+- [Бриф первой 3D-модели: папа](docs/series/dad-3d-model-brief.md) — визуальные якоря, открытые вопросы и approval gates.
 - [Бриф следующего героя: мальчик](docs/series/child-3d-model-brief.md) — заготовка для этапа после папы.
-- [Реестр ассетов и лицензий](docs/series/asset-ledger.md) — происхождение импортированных masters и права на сторонние модули.
+- [Реестр ассетов и лицензий](docs/series/asset-ledger.md) — происхождение локальных masters и права на сторонние модули.
 - [Производственный план](docs/series/production-plan.md) — этапы от первого 3D-теста до локального MP4.
 - [Разбор отклонённого cutout-теста](docs/series/proof-of-style.md) — причины отказа и новый критерий принятия.
-- `assets/references/raw/` — исходные изображения, сохранённые без изменений; `assets/references/modeling/` — производные crop-файлы прежних скриншотов; `assets/references/docuflow/` — неизменённые character masters/JSON и выбранные motion references с provenance (только modeling/timing references, не финальные render assets).
+- `assets/references/raw/` — исходные изображения, сохранённые без изменений; `assets/references/modeling/` — производные crop-файлы; `assets/references/character-masters/` — локальные masters/JSON и motion references (только моделирование и тайминг, не финальные render assets).
 
 Сначала утверждаем дизайн и короткий технический тест анимации; затем — series bible, пилот, storyboard/animatic и сборка. Никакой результат не называется готовым рендером, пока его фактически не проверили.

@@ -8,7 +8,7 @@ const toolRoot = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(toolRoot, '../..');
 const workspace = path.join(toolRoot, 'workspace');
 const engineWasm = path.join(toolRoot, 'node_modules/@volter/blender-engine/wasm');
-const references = path.join(repoRoot, 'assets/references/docuflow/characters/dad');
+const references = path.join(repoRoot, 'assets/references/character-masters/characters/dad');
 const pendingDocuments = new Map();
 const documentChunks = new Map();
 
