@@ -8,9 +8,9 @@
 
 **Фаза:** подготовка первого Blender-персонажа — папы.
 
-**Сейчас:** фактический запуск Blender 5.2 WASM в Chromium подтверждён; Blender Python создал Dad gray blockout, три native Cycles рендера и сохранённый/повторно открытый `.blend`.
+**Сейчас:** Blender 5.2 WASM/Python/Cycles/.blend подтверждены. Пользователь оценил Dad blockout на **9/10** и считает его достаточно хорошей основой для продолжения.
 
-**Блокер:** технический runtime gate пройден; R3 остаётся открытым до визуального просмотра и решения пользователя. Blockout намеренно грубый, с primitive shells; его нельзя считать одобренной моделью или готовой анимацией. Подробности и ограничения — в [`blender-wasm-runtime.md`](blender-wasm-runtime.md).
+**Граница одобрения:** это разрешение продолжать следующий этап, не sign-off финальной модели. Dad остаётся грубым mesh object из primitive shells, без clean topology, rig и анимации. Следующий gate — refine Dad без бесконечной полировки, затем быстро проверить family lineup и двигаться дальше. Детали runtime — в [`blender-wasm-runtime.md`](blender-wasm-runtime.md).
 
 ## Этапы и контрольные ворота
 
@@ -19,8 +19,8 @@
 | R0 | ✅ Готово | Зафиксировать Blender-first pipeline, отказ от неудачного 2.5D cutout и требования к proof-of-style | Документы и правила проверки опубликованы; rejected test не выдаётся за результат |
 | R1 | ✅ Готово | Зафиксировать и проверить локальные character masters; изучить legacy 3D prototype | У папы/мамы/сына есть неизменённые reference-файлы и provenance; старый NumPy prototype помечен как справочник, а не Blender asset |
 | R2 | 🟡 В работе | Подготовить авторский brief первого героя — папы | Визуальные якоря, одежда и нерешённые детали записаны; пользователь подтвердил светлый crewneck без капюшона |
-| R3 | 🟡 Технический proof готов; visual approval pending | Проверить серый 3D blockout папы и уточнить геометрию по обратной связи | Blender Python, native Cycles front/¾/profile и повторно открытый `.blend` подтверждены. Пользователь оценивает силуэт/лицо; blockout — один mesh object из раздельных primitive shells, не production topology |
-| R4 | ⏸ После R3 approval | Доработать идентичность, волосы/бороду, одежду и материалы | В одном меше/сцене сохраняются узнаваемость и внешний вид в трёх ракурсах и close-up |
+| R3 | ✅ Blockout accepted as working base (9/10) | Зафиксировать первый серый 3D blockout папы и проверить runtime | Blender Python, native Cycles front/¾/profile и reopen `.blend` подтверждены; пользователь дал 9/10. Это одобрение основы для продолжения, не production-модели |
+| R4 | 🟡 В работе | Уточнить Dad identity, форму лица/волос/бороды, одежду и перейти к clean topology | Узнаваемый front/¾/profile и close-up после итерации; без бесконечного микрополиша |
 | R5 | ⏸ После R4 | Собрать body rig и facial rig | Проверены eye aim, blink с веками, brow/jaw controls, базовые visemes; устойчивые деформации тела/одежды |
 | R6 | ⏸ После R5 | Анимационный proof: idle, взгляд, поворот, жест, 2–3 шага | Непрерывное движение одного рига; стопы не скользят, лицо/кисти/одежда не ломаются; рендер фактически получен из Blender |
 | R7 | ⏸ После R6 approval | Добавить маму и сына как отдельные согласованные 3D-герои | У каждого собственные brief, blockout, rig и identity gate; общий lineup читается как одна семья |
@@ -28,11 +28,11 @@
 
 ## Ближайшие действия
 
-1. **Получить visual review** трёх native Cycles ракурсов папы: силуэт, лицо/борода/волосы, рост и relaxed pose; crewneck без капюшона оставить как подтверждённое решение.
-2. На конкретной обратной связи уточнить параметры Blender-сцены и повторно проверить front / ¾ / profile на одинаковом масштабе; blockout остаётся черновиком.
-3. Только после явного одобрения сходства закрыть R3 и перейти к чистой топологии, затем body/facial rig и motion proof.
+1. **Refine Dad as the pilot**: improve readable face/hair/beard and crewneck silhouette, keeping the accepted proportions as the base; compare front / ¾ / profile / close-up.
+2. До дорогой детализации сделать быстрый общий lineup/scale-check для Dad/Mom/Son, чтобы не зафиксировать одному герою пропорции, несовместимые с семьёй.
+3. Завершить Dad clean topology, body/facial rig и короткий motion proof; после проверки переиспользовать утверждённый подход для мамы и сына поочерёдно.
 
-Runtime smoke test завершён, но сам дизайн/модель/анимация не утверждены. Никакого фиктивного подтверждения.
+Blockout получил разрешение на продолжение, но финальная модель/rig/animation ещё не готовы.
 
 ## Решения, которые считаются зафиксированными
 
