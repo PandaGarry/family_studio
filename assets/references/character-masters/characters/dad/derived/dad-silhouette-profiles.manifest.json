@@ -1,0 +1,33 @@
+{
+  "purpose": "measurement aid only; not a 3D model or approval",
+  "source_assets_unchanged": true,
+  "alpha_threshold_inclusive": 128,
+  "sample_step_px": 2,
+  "origin_convention": "z_fraction_from_ground=0 at source canvas bottom and 1 at top; x is measured from source canvas center",
+  "boundary_convention": "leftmost/rightmost pixels at or above alpha threshold for each sampled row; transparent holes are intentionally collapsed to the outer silhouette",
+  "source_views": {
+    "front.png": {
+      "size_px": [
+        338,
+        626
+      ],
+      "sha256": "127c7b901387b9448d118c3dd8cff08333607daf846632e5a919f45070093e14"
+    },
+    "three_quarter.png": {
+      "size_px": [
+        293,
+        625
+      ],
+      "sha256": "a56d8c6a3c643cf64df0408d2ac54d7e763f07e2141de544579c066df3293ad5"
+    },
+    "side.png": {
+      "size_px": [
+        148,
+        625
+      ],
+      "sha256": "72695acbc3c4490fe82cbf1d498ccb7df1d2ad057d172db8069f28c725d4bfb4"
+    }
+  },
+  "csv": "dad-silhouette-profiles.csv",
+  "sample_count": 934
+}
