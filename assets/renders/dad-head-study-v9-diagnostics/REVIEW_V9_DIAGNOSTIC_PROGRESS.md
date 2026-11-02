@@ -93,4 +93,14 @@ V8 не содержит бороды. Проверенный `HumanService.add_
 
 ## Решение и следующий шаг
 
-Есть содержательный обувной тест и hair кандидаты для дальнейшей оценки, но не найдено подходящих свитера/длиннорукавной одежды или подтверждённой бороды; волосы и глаза ещё не сверены с референсом, а body shader всё ещё требует отдельного решения. **Поэтому полный V9 `.blend` и итоговый набор Front / 3/4 / Profile / Close-up сейчас не создавались.** Следующий ответственный шаг — утвердить или отвергнуть `short01`/`short04` по референсу, продолжить поиск подходящей одежды/бороды и лишь затем собирать кандидат, если появится достаточная визуальная причина. V8 source, V8 approval и shared renderer status не менялись.
+Есть содержательные hair, eye, shoe и facial-hair пробы, но выбор по референсу ещё не означает одобрение персонажа. Полнофигурная сцена V8 и все отдельные V9 probes остаются диагностическими; сам V8 source, approval status и shared renderer не менялись. Следующий шаг — пользовательская оценка бородной пары; только после визуального одобрения можно отдельно решать, допустима ли интеграция в основной V9.
+
+## 7. Борода + усы: отдельный AGPL3 fit/render probe (2026-11-02)
+
+Пользователь разрешил отдельную проверку `grinsegold_full_beard` и затем `grinsegold_moustache` по строгой AGPL3 трактовке, с атрибуцией и лицензионными материалами. Оба MHCLO header указывают `license AGPL3`, тогда как bodyparts06 index указывает CC-BY; конфликт metadata остаётся неразрешённым, поэтому обе проверки консервативно сопровождаются AGPL-3.0-only текстом и источниками.
+
+Оба MHCLO успешно fitted через `HumanService.add_mhclo_asset(..., asset_type="Hair")` к **отдельной копии V8**, не к исходному файлу. Результат: `Full_beard` — 423 vertices / 374 polygons; `grinsegold_moustache` — 81 / 60. Cycles 48 samples: Front, Three-quarter, Profile и Face close-up завершились; отдельный `.blend` хранит packed textures. На старте повторяется runtime warning `Human.body` / `BodySectionsRouter`; `Maximum number of closures exceeded` в этих рендерах не появлялся. В diagnostic shader применены diffuse RGBA maps, normal maps оставлены в source bundle, но не подключались.
+
+Подробный visual review и side-by-side с Dad reference crops: [`REVIEW_V9_BEARD_PAIR_AGPL3.md`](REVIEW_V9_BEARD_PAIR_AGPL3.md). Усы видны и на проверенных ракурсах не имеют очевидного floating gap к щёчной бороде. Это лучший проверенный реальный beard candidate на данный момент, но он не принят: в close-up заметен центральный шов moustache, край жёсткий/угловатый, нижняя борода плотнее/непрерывнее Dad reference. Pair остаётся **отдельным unapproved diagnostic**, не включён в основной V9.
+
+Исходные MHCLO/OBJ/MHMAT/textures, attribution и AGPL text: [`assets/models/dad/diagnostics/beard-pair-agpl3/`](../../models/dad/diagnostics/beard-pair-agpl3/).

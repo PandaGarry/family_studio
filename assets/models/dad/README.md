@@ -33,3 +33,9 @@ V3 начинался с временного нейтрального sculpting
 - Полученный Blender study находится только в игнорируемой runtime-папке; в `assets/models/dad/studies/` он не включается как готовая модель.
 
 V3 остаётся отдельным диагностическим материалом от неподходящего временного кандидата: [`reference-comparison-review.png`](../../renders/dad-head-study-v3/reference-comparison-review.png). Одобренной 3D-модели по-прежнему нет. Следующие изменения не должны начинаться с V1/V2/R3/R4, V3 или запасного Dan2-файла; V4 допускается лишь как техническая отправная точка, но его likeness также не утверждён.
+
+## V8 / V9 probes — diagnostic only, not approved
+
+- [V8 MPFB2 study](studies/dad-head-study-v8-mpfb-unapproved.blend) остаётся отдельной, неутверждённой базой; исходный файл не менялся.
+- [V9 diagnostic progress and probe record](../../renders/dad-head-study-v9-diagnostics/REVIEW_V9_DIAGNOSTIC_PROGRESS.md) содержит результаты по материалу, волосам, глазам, обуви и бороде. Отдельный AGPL3 test of the real beard pair — [review board](../../renders/dad-head-study-v9-diagnostics/beard-pair-review-board.png), [test report](../../renders/dad-head-study-v9-diagnostics/REVIEW_V9_BEARD_PAIR_AGPL3.md) and [editable isolated blend](diagnostics/beard-pair-agpl3/dad-beard-pair-agpl3-unapproved.blend).
+- Beard pair source, attribution and license materials are preserved in [`diagnostics/beard-pair-agpl3/`](diagnostics/beard-pair-agpl3/). The candidate is **not approved for the main V9 scene**; the AGPL3 metadata discrepancy is documented and the test follows the stricter license interpretation.
